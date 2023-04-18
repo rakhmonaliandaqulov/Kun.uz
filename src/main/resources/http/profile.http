@@ -10,3 +10,39 @@ Content-Type:  application/json
   "password": "123456",
   "role": "ADMIN"
 }
+
+### Profile List with pagination
+GET http://localhost:8080/api/v1/profile/list-paging
+
+### Profile get by id
+GET http://localhost:8080/api/v1/profile/4
+
+### Profile delete by id
+DELETE http://localhost:8080/api/v1/profile/5
+
+### Profile update by Id with Admin
+PUT http://localhost:8080/api/v1/profile/5
+Content-Type: application/json
+
+{
+  "name": "sfvfg"
+}
+
+### Profile update by Id
+PUT http://localhost:8080/api/v1/profile/5
+Content-Type: application/json
+
+{
+  "name": "sfvfg"
+}
+
+###
+PUT http://localhost:8080/api/v1/profile/update/5
+Content-Type: application/json
+
+{
+  "name": "Toshmat",
+  "surname": "Toshmatov",
+  "phone": 12345,
+  "password": "653"
+}

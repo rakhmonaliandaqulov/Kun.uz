@@ -1,5 +1,6 @@
 package com.example.dto;
 
+import com.example.enums.GeneralStatus;
 import com.example.enums.ProfileRole;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,4 +15,6 @@ public class ProfileDto {
     private String phone;
     private String password;
     private ProfileRole role;
+    private GeneralStatus status;
+    private Boolean visible;
 }
