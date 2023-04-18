@@ -6,3 +6,16 @@ Content-Type: application/json
   "email": "admin@mail.ru",
   "password": "123456"
 }
+
+### Registration
+POST http://localhost:8080/api/v1/auth/registration
+Content-Type: application/json
+
+{
+  "name": "Toshmat",
+  "surname": "Toshmatov",
+  "email": "toshmat234@gmail.com",
+  "phone": "991234567",
+  "password": "2211"
+
+}

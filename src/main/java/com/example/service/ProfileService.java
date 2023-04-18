@@ -15,7 +15,7 @@ public class ProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    public ProfileDto create(ProfileDto dto) {
+    public ProfileDto create(ProfileDto dto, Integer adminId) {
         // check - homework
         isValidProfile(dto);
 
@@ -28,6 +28,7 @@ public class ProfileService {
         entity.setPassword(MD5Util.getMd5Hash(dto.getPassword())); // MD5 ?
         entity.setCreatedDate(LocalDateTime.now());
         entity.setVisible(true);
+        entity.setPrtId(adminId);
         entity.setStatus(GeneralStatus.ACTIVE);
         profileRepository.save(entity); // save profile
 
