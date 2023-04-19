@@ -46,7 +46,7 @@ public class ProfileService {
         // throw ...
     }
     public Page<ProfileDto> getAll(int page, int size) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable paging = PageRequest.of(page - 1, size, sort);
         Page<ProfileEntity> pageObj = profileRepository.findAll(paging);
 

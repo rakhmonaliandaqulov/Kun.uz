@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "region")
-public class Region {
+public class RegionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,5 +22,7 @@ public class Region {
     @Column(name = "visible")
     private Boolean visible;
     @Column(name = "created_date")
-    private LocalDateTime created_date;
+    private LocalDateTime createdDate;
+    @Column(name = "prrt_id")
+    private Integer prtId;
 }
