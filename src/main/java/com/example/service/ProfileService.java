@@ -42,12 +42,11 @@ public class ProfileService {
         dto.setId(entity.getId());
         return dto;
     }
-
     public void isValidProfile(ProfileDto dto) {
         // throw ...
     }
     public Page<ProfileDto> getAll(int page, int size) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable paging = PageRequest.of(page - 1, size, sort);
         Page<ProfileEntity> pageObj = profileRepository.findAll(paging);
 
@@ -55,21 +54,21 @@ public class ProfileService {
 
         List<ProfileEntity> entityList = pageObj.getContent();
         List<ProfileDto> dtoList = new LinkedList<>();
-        if (paging.equals(null)) {
-            throw new ItemNotFoundException("List is empty!");
+        if (pageObj != null) {
+            for (ProfileEntity entity : entityList) {
+                ProfileDto dto = new ProfileDto();
+                dto.setId(entity.getId());
+                dto.setName(entity.getName());
+                dto.setSurname(entity.getSurname());
+                dto.setPhone(entity.getPhone());
+                dto.setEmail(entity.getEmail());
+                dto.setRole(entity.getRole());
+                dtoList.add(dto);
+            }
+            Page<ProfileDto> response = new PageImpl<ProfileDto>(dtoList, paging, totalCount);
+            return response;
         }
-        for (ProfileEntity entity : entityList) {
-        ProfileDto dto = new ProfileDto();
-        dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        dto.setSurname(entity.getSurname());
-        dto.setPhone(entity.getPhone());
-        dto.setEmail(entity.getEmail());
-        dto.setRole(entity.getRole());
-        dtoList.add(dto);
-        }
-        Page<ProfileDto> response = new PageImpl<ProfileDto>(dtoList, paging, totalCount);
-        return response;
+        throw new ItemNotFoundException("List id empty");
     }
     public ProfileDto getById(Integer id) {
         ProfileEntity entity = get(id);
@@ -108,7 +107,6 @@ public class ProfileService {
         }
          return dtoList;
     }
-
     public Boolean deleteById(Integer id) {
         ProfileEntity entity = get(id);
         if (entity == null) {
@@ -119,7 +117,6 @@ public class ProfileService {
         profileRepository.save(entity);
         return true;
     }
-
     public Boolean updateAdmin(Integer id, ProfileDto profileDto) {
         ProfileEntity entity = get(id);
         if (entity == null) {
@@ -132,18 +129,20 @@ public class ProfileService {
         entity.setEmail(profileDto.getEmail());
         entity.setRole(profileDto.getRole());
         entity.setStatus(profileDto.getStatus());
-        entity.setVisible(profileDto.getVisible());
 
         profileRepository.save(entity);
         return true;
-
     }
     public Boolean update(Integer id, ProfileDto profileDto) {
         ProfileEntity entity = get(id);
         if (entity == null) {
             throw new ItemNotFoundException("Profile not found");
         }
+
+        if (Optional.ofNullable(profileDto.getName()).isPresent()){
         entity.setName(profileDto.getName());
+        }
+
         entity.setSurname(profileDto.getSurname());
         entity.setPhone(profileDto.getPhone());
         entity.setPassword(MD5Util.getMd5Hash(profileDto.getPassword()));

@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "category")
-public class ArticleType {
+@Table(name = "article_type")
+public class ArticleTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -19,8 +19,10 @@ public class ArticleType {
     private String nameRu;
     @Column(name = "name_eng")
     private String nameEng;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
     @Column(name = "visible")
     private Boolean visible;
-    @Column(name = "created_date")
-    private LocalDateTime created_date;
+    @Column(name = "prt_id")
+    private Integer prtId;
 }
