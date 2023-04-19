@@ -1,0 +1,28 @@
+### Region create
+POST http://localhost:8080/api/v1/category/
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODE5MDc2MzgsImlkIjo0LCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODE5OTQwMzgsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.fzwOPAPwBOqtT1y-Rd1lHwleqJ78LU25qdP5MwoUq2zEP7bQiLhOudqW2LBIPwO7DhumaA44_Yf0T5VbSHXKnA
+Content-Type: application/json
+
+{
+  "nameUz": "Audio",
+  "nameRU": "Аудио",
+  "nameEng": "Audio"
+}
+
+### Region update with id
+PUT http://localhost:8080/api/v1/category/4
+Content-Type: application/json
+
+{
+  "nameUz": "Radio",
+  "nameRU": "Радио",
+  "nameEng": "Radio"
+}
+
+###  Region delete with id
+DELETE http://localhost:8080/api/v1/category/4
+
+### Regionx get all
+GET http://localhost:8080/api/v1/category/list-paging
+
+### Get by lang
