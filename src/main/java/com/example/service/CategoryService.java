@@ -1,9 +1,12 @@
 package com.example.service;
 
 import com.example.dto.CategoryDto;
+import com.example.dto.CategoryLangDto;
 import com.example.dto.RegionDto;
+import com.example.dto.RegionLangDto;
 import com.example.entity.CategoryEntity;
 import com.example.entity.RegionEntity;
+import com.example.exps.AppBadRequestException;
 import com.example.exps.ItemNotFoundException;
 import com.example.repository.CategoryRepository;
 import com.example.repository.RegionRepository;
@@ -91,5 +94,53 @@ public class CategoryService {
             return response;
         }
         throw new ItemNotFoundException("ArticleType is empty");
+    }
+
+    public List<CategoryLangDto> getLang(String lang) {
+        List<CategoryLangDto> list = new LinkedList<>();
+
+        switch (lang) {
+            case "uz" -> list.addAll(getUzLang());
+            case "ru" -> list.addAll(getRuLang());
+            case "eng" -> list.addAll(getEngLang());
+            case "null" -> throw new ItemNotFoundException("Item not found");
+            default -> throw new AppBadRequestException("Error");
+        }
+        return list;
+    }
+
+    private List<CategoryLangDto> getEngLang() {
+        List<CategoryLangDto> list = new LinkedList<>();
+        Iterable<CategoryEntity> entity = categoryRepository.findAll();
+        for (CategoryEntity categoryEntity : entity) {
+            CategoryLangDto dto = new CategoryLangDto();
+            dto.setId(categoryEntity.getId());
+            dto.setName(categoryEntity.getNameEng());
+            list.add(dto);
+        }
+        return list;
+    }
+
+    private List<CategoryLangDto> getRuLang() {
+        List<CategoryLangDto> list = new LinkedList<>();
+        Iterable<CategoryEntity> entity = categoryRepository.findAll();
+        for (CategoryEntity categoryEntity : entity) {
+            CategoryLangDto dto = new CategoryLangDto();
+            dto.setId(categoryEntity.getId());
+            dto.setName(categoryEntity.getNameRu());
+            list.add(dto);
+        }
+        return list;
+    }
+    private List<CategoryLangDto> getUzLang() {
+        List<CategoryLangDto> list = new LinkedList<>();
+        Iterable<CategoryEntity> entity = categoryRepository.findAll();
+        for (CategoryEntity categoryEntity : entity) {
+            CategoryLangDto dto = new CategoryLangDto();
+            dto.setId(categoryEntity.getId());
+            dto.setName(categoryEntity.getNameUz());
+            list.add(dto);
+        }
+        return list;
     }
 }

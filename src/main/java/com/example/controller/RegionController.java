@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.ArticleTypeDto;
 import com.example.dto.JwtDto;
 import com.example.dto.RegionDto;
+import com.example.dto.RegionLangDto;
 import com.example.enums.ProfileRole;
 import com.example.exps.MethodNotAllowedException;
 import com.example.service.ArticleTypeService;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/region")
 public class RegionController {
@@ -44,5 +48,10 @@ public class RegionController {
     public ResponseEntity<Page<RegionDto>> getAll(@RequestParam(value = "page", defaultValue = "1") int page,
                                                        @RequestParam(value = "size", defaultValue = "2") int size) {
         return ResponseEntity.ok(regionService.getAll(page, size));
+    }
+
+    @GetMapping("/getLang/{lang}")
+    public ResponseEntity<List<RegionLangDto>> getLang(@PathVariable ("lang") String lang) {
+        return ResponseEntity.ok(regionService.getLang(lang));
     }
 }

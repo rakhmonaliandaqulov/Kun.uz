@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.dto.CategoryDto;
+import com.example.dto.CategoryLangDto;
 import com.example.dto.JwtDto;
 import com.example.dto.RegionDto;
 import com.example.enums.ProfileRole;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/category")
 public class CategoryController {
@@ -44,5 +48,10 @@ public class CategoryController {
     public ResponseEntity<Page<CategoryDto>> getAll(@RequestParam(value = "page", defaultValue = "1") int page,
                                                   @RequestParam(value = "size", defaultValue = "2") int size) {
         return ResponseEntity.ok(categoryService.getAll(page, size));
+    }
+
+    @GetMapping("/getLang/{lang}")
+    public ResponseEntity<List<CategoryLangDto>> getLang(@PathVariable ("lang") String lang) {
+        return ResponseEntity.ok(categoryService.getLang(lang));
     }
 }

@@ -1,10 +1,14 @@
 package com.example.service;
 
 import com.example.dto.ArticleTypeDto;
+import com.example.dto.ArticleTypeLangDto;
+import com.example.dto.CategoryLangDto;
 import com.example.dto.ProfileDto;
 import com.example.entity.ArticleTypeEntity;
+import com.example.entity.CategoryEntity;
 import com.example.entity.ProfileEntity;
 import com.example.enums.GeneralStatus;
+import com.example.exps.AppBadRequestException;
 import com.example.exps.ItemNotFoundException;
 import com.example.repository.ArticleTypeRepository;
 import com.example.util.MD5Util;
@@ -92,5 +96,53 @@ public class ArticleTypeService {
             return response;
         }
         throw new ItemNotFoundException("ArticleType is empty");
+    }
+
+    public List<ArticleTypeLangDto> getLang(String lang) {
+        List<ArticleTypeLangDto> list = new LinkedList<>();
+
+        switch (lang) {
+            case "uz" -> list.addAll(getUzLang());
+            case "ru" -> list.addAll(getRuLang());
+            case "eng" -> list.addAll(getEngLang());
+            case "null" -> throw new ItemNotFoundException("Item not found");
+            default -> throw new AppBadRequestException("Error");
+        }
+        return list;
+    }
+
+    private List<ArticleTypeLangDto> getEngLang() {
+        List<ArticleTypeLangDto> list = new LinkedList<>();
+        Iterable<ArticleTypeEntity> entity = articleTypeRepository.findAll();
+        for (ArticleTypeEntity articleTypeEntity : entity) {
+            ArticleTypeLangDto dto = new ArticleTypeLangDto();
+            dto.setId(articleTypeEntity.getId());
+            dto.setName(articleTypeEntity.getNameEng());
+            list.add(dto);
+        }
+        return list;
+    }
+
+    private List<ArticleTypeLangDto> getRuLang() {
+        List<ArticleTypeLangDto> list = new LinkedList<>();
+        Iterable<ArticleTypeEntity> entity = articleTypeRepository.findAll();
+        for (ArticleTypeEntity articleTypeEntity : entity) {
+            ArticleTypeLangDto dto = new ArticleTypeLangDto();
+            dto.setId(articleTypeEntity.getId());
+            dto.setName(articleTypeEntity.getNameRu());
+            list.add(dto);
+        }
+        return list;
+    }
+    private List<ArticleTypeLangDto> getUzLang() {
+        List<ArticleTypeLangDto> list = new LinkedList<>();
+        Iterable<ArticleTypeEntity> entity = articleTypeRepository.findAll();
+        for (ArticleTypeEntity articleTypeEntity : entity) {
+            ArticleTypeLangDto dto = new ArticleTypeLangDto();
+            dto.setId(articleTypeEntity.getId());
+            dto.setName(articleTypeEntity.getNameUz());
+            list.add(dto);
+        }
+        return list;
     }
 }

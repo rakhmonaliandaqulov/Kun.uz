@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import com.example.dto.ArticleTypeDto;
+import com.example.dto.ArticleTypeLangDto;
+import com.example.dto.CategoryLangDto;
 import com.example.dto.JwtDto;
 import com.example.enums.ProfileRole;
 import com.example.exps.MethodNotAllowedException;
@@ -46,5 +48,10 @@ public class ArticleTypeController {
     public ResponseEntity<Page<ArticleTypeDto>> getAll(@RequestParam(value = "page", defaultValue = "1") int page,
                                                        @RequestParam(value = "size", defaultValue = "2") int size) {
         return ResponseEntity.ok(articleTypeService.getAll(page, size));
+    }
+
+    @GetMapping("/getLang/{lang}")
+    public ResponseEntity<List<ArticleTypeLangDto>> getLang(@PathVariable ("lang") String lang) {
+        return ResponseEntity.ok(articleTypeService.getLang(lang));
     }
 }
