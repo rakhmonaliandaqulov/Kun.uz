@@ -1,4 +1,4 @@
-package com.example.dto;
+package com.example.dto.category;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 @Getter
 @Setter
-public class RegionDto {
+public class CategoryDto {
     private Integer id;
     private String nameUz;
     private String nameRU;

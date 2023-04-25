@@ -1,12 +1,10 @@
 package com.example.controller;
 
-import com.example.dto.ArticleTypeDto;
 import com.example.dto.JwtDto;
-import com.example.dto.RegionDto;
-import com.example.dto.RegionLangDto;
+import com.example.dto.region.RegionDto;
+import com.example.dto.region.RegionLangDto;
 import com.example.enums.ProfileRole;
 import com.example.exps.MethodNotAllowedException;
-import com.example.service.ArticleTypeService;
 import com.example.service.RegionService;
 import com.example.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +29,14 @@ public class RegionController {
         if (!jwtDTO.getRole().equals(ProfileRole.ADMIN)) {
             throw new MethodNotAllowedException("Method not allowed");
         }
+        JwtDto jwtDto = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
         return ResponseEntity.ok(regionService.create(dto, jwtDTO.getId()));
     }
     @PutMapping("/{id}")
     public ResponseEntity<Boolean> update(@PathVariable("id") Integer id,
                                           @RequestBody RegionDto regionDto) {
         return ResponseEntity.ok(regionService.update(id, regionDto));
+
     }
 
     @DeleteMapping("/{id}")

@@ -1,8 +1,7 @@
 package com.example.controller;
 
-import com.example.dto.ArticleTypeDto;
-import com.example.dto.ArticleTypeLangDto;
-import com.example.dto.CategoryLangDto;
+import com.example.dto.articleType.ArticleTypeDto;
+import com.example.dto.articleType.ArticleTypeLangDto;
 import com.example.dto.JwtDto;
 import com.example.enums.ProfileRole;
 import com.example.exps.MethodNotAllowedException;
@@ -10,7 +9,6 @@ import com.example.service.ArticleTypeService;
 import com.example.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

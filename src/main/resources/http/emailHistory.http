@@ -1,0 +1,5 @@
+### GET BY EMAIL
+GET http://localhost:8080/api/v1/email-history/get-by/email/kholmuminovruzibek@gmail.com
+
+### GET BY DATE
+GET http://localhost:8080/api/v1/email-history/get-by/date/2023-04-24

@@ -1,18 +1,11 @@
 package com.example.service;
 
-import com.example.dto.ArticleTypeDto;
-import com.example.dto.ArticleTypeLangDto;
-import com.example.dto.CategoryLangDto;
-import com.example.dto.ProfileDto;
+import com.example.dto.articleType.ArticleTypeDto;
+import com.example.dto.articleType.ArticleTypeLangDto;
 import com.example.entity.ArticleTypeEntity;
-import com.example.entity.CategoryEntity;
-import com.example.entity.ProfileEntity;
-import com.example.enums.GeneralStatus;
 import com.example.exps.AppBadRequestException;
 import com.example.exps.ItemNotFoundException;
 import com.example.repository.ArticleTypeRepository;
-import com.example.util.MD5Util;
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;

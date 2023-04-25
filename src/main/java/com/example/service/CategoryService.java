@@ -1,16 +1,11 @@
 package com.example.service;
 
-import com.example.dto.CategoryDto;
-import com.example.dto.CategoryLangDto;
-import com.example.dto.RegionDto;
-import com.example.dto.RegionLangDto;
+import com.example.dto.category.CategoryDto;
+import com.example.dto.category.CategoryLangDto;
 import com.example.entity.CategoryEntity;
-import com.example.entity.RegionEntity;
 import com.example.exps.AppBadRequestException;
 import com.example.exps.ItemNotFoundException;
 import com.example.repository.CategoryRepository;
-import com.example.repository.RegionRepository;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;

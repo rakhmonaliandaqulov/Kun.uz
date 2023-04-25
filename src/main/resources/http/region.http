@@ -26,3 +26,4 @@ DELETE http://localhost:8080/api/v1/region/3
 GET http://localhost:8080/api/v1/region/list-paging
 
 ### Get by lang
+GET http://localhost:8080/api/v1/region/getLang/uz

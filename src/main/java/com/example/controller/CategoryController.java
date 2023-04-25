@@ -1,13 +1,11 @@
 package com.example.controller;
 
-import com.example.dto.CategoryDto;
-import com.example.dto.CategoryLangDto;
+import com.example.dto.category.CategoryDto;
+import com.example.dto.category.CategoryLangDto;
 import com.example.dto.JwtDto;
-import com.example.dto.RegionDto;
 import com.example.enums.ProfileRole;
 import com.example.exps.MethodNotAllowedException;
 import com.example.service.CategoryService;
-import com.example.service.RegionService;
 import com.example.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
