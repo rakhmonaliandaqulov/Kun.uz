@@ -2,6 +2,8 @@ package com.example.repository;
 
 import ch.qos.logback.core.model.INamedModel;
 import com.example.entity.EmailHistoryEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +16,6 @@ public interface EmailHistoryRepository extends CrudRepository<EmailHistoryEntit
     EmailHistoryEntity findByEmail(String email);
 
     List<EmailHistoryEntity> findByCreatedDate(LocalDate date);
+
+    Page<EmailHistoryEntity> findAll(Pageable paging);
 }
