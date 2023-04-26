@@ -48,7 +48,7 @@ public class CategoryService {
     public CategoryEntity get(Integer id) {
         Optional<CategoryEntity> optional = categoryRepository.findById(id);
         if (optional.isEmpty()) {
-            throw new ItemNotFoundException("Article not found: " + id);
+            throw new ItemNotFoundException("Category not found: " + id);
         }
         return optional.get();
     }

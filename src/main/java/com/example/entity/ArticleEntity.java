@@ -27,10 +27,19 @@ public class ArticleEntity {
     private Long sharedCount;
     @Column(name = "image_id")
     private Integer imageId;
+
     @Column(name = "region_id")
     private Integer regionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id", updatable = false, insertable = false)
+    private RegionEntity region;
+
     @Column(name = "category_id")
     private Integer categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", updatable = false, insertable = false)
+    private CategoryEntity category;
+
     @Column(name = "moderator_id")
     private Integer moderatorId;
     @Column(name = "publisher_id")

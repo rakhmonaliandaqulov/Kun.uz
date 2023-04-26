@@ -1,0 +1,14 @@
+### Article create
+POST http://localhost:8080/api/v1/article/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI0MjUxNjQsImlkIjozLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgyNTExNTY0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.NrQJvrFzMESADqdpyDQFI31CM968e9qQSgH69p9D8-Rqzw9wh7lf7LVyCkRv6yBz7rDx4PYgfnaKFda_EM9q3A
+Content-Type: application/json
+
+{
+  "title": "Referendum",
+  "description": "hamma qatnashishi shart",
+  "content": "30 moddaga ovoz bering",
+  "sharedCount": 123,
+  "imageId": 124,
+  "regionId": 3,
+  "categoryId": 3
+}
