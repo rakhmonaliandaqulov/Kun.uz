@@ -1,9 +1,12 @@
 package com.example.service;
 
+import com.example.entity.ArticleEntity;
 import com.example.entity.AttachEntity;
 import com.example.exps.ItemNotFoundException;
 import com.example.repository.AttachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,11 +15,13 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -147,8 +152,31 @@ public class AttachService {
     }
 
     public AttachEntity get(String id) {
-        return attachRepository.findById(Integer.valueOf(id)).orElseThrow(() -> {
+        return attachRepository.findById(String.valueOf(id)).orElseThrow(() -> {
             throw new ItemNotFoundException("Attach not ound");
         });
     }
+
+    public Resource download(String fileName) {
+        try {
+            Path file = Paths.get("attaches/" + fileName);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+    public Boolean delete(String id) {
+        AttachEntity attachEntity = get(id);
+        if (attachEntity == null){
+            throw new ItemNotFoundException("Attach not found");
+        }
+        attachRepository.deleteById(id);
+        return true;
+    }
+
 }
