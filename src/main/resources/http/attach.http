@@ -3,12 +3,12 @@ POST http://localhost:8080/api/v1/attach/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="test2_imge_1.jpg"
+Content-Disposition: form-data; name="file"; filename="test_imge_1.jpg"
 
-< /Users/macuser/Downloads/tren-4.webp
+< /Users/macuser/Downloads/test_imge_1.jpg
 
 ###  Attach get photo by name
-GET http://localhost:8080/api/v1/attach/open/test_imge_1.jpg
+GET http://localhost:8080/api/v1/attach/open/f2dcca31-d1ab-460d-99c9-c32a18f9f9f4.png
 
 ### video
 POST http://localhost:8080/api/v1/attach/upload
@@ -22,5 +22,4 @@ Content-Disposition: form-data; name="file"; filename="333.mp4"
 #< C:\Users\BigMan\Desktop\11\test_imge_1.jpg
 
 ###  Attach get video by name
-GET http://localhost:8080/api/v1/attach/open_general/08572070-7d8a-4f84-9884-6c522e7dbd3e.mp4
-
+GET http://localhost:8080/api/v1/attach/open_general/59b4c377-6ef6-465d-8142-ef41eb479d2c
