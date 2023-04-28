@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.dto.article.ArticleDto;
+import com.example.dto.article.ArticleRequestDto;
 import com.example.entity.*;
 import com.example.enums.ArticleStatus;
 import com.example.exps.AppBadRequestException;
@@ -20,7 +21,28 @@ public class ArticleService {
     private RegionService regionService;
     @Autowired
     private CategoryService categoryService;
-    public Integer create(ArticleDto dto, Integer id) {
+    @Autowired
+    private ProfileService profileService;
+
+    public ArticleRequestDto create(ArticleRequestDto dto, Integer moderId) {
+        // check
+        ProfileEntity moderator = profileService.get(moderId);
+        RegionEntity region = regionService.get(dto.getRegionId());
+        CategoryEntity category = categoryService.get(dto.getCategoryId());
+
+        ArticleEntity entity = new ArticleEntity();
+        entity.setTitle(dto.getTitle());
+        entity.setDescription(dto.getDescription());
+        entity.setContent(dto.getContent());
+        entity.setModeratorId(moderId);
+        entity.setRegionId(dto.getRegionId());
+        entity.setCategoryId(dto.getCategoryId());
+        entity.setAttachId(dto.getAttachId());
+        // type
+        articleRepository.save(entity);
+        return dto;
+    }
+   /* public Integer create(ArticleDto dto, Integer id) {
         RegionEntity student = regionService.get(dto.getRegionId());
         if (student == null) {
             throw new AppBadRequestException("Region not found: " + dto.getRegionId());
@@ -39,15 +61,15 @@ public class ArticleService {
         entity.setRegionId(dto.getRegionId());
         entity.setCategoryId(dto.getCategoryId());
         entity.setVisible(true);
-        entity.setStatus(ArticleStatus.NOTPUBLISHED);
-        entity.setCreated_date(LocalDateTime.now());
+        entity.setStatus(ArticleStatus.NOT_PUBLISHED);
+        entity.setCreatedDate(LocalDateTime.now());
         entity.setVisible(Boolean.TRUE);
         entity.setModeratorId(3);
         articleRepository.save(entity); // save profile
 
         dto.setId(entity.getId());
         return entity.getId();
-    }
+    }*/
 
     public Boolean deleteById(Integer id) {
             ArticleEntity entity = get(id);
@@ -68,7 +90,7 @@ public class ArticleService {
         return optional.get();
     }
 
-    public Boolean update(Integer id, ArticleDto dto) {
+   /* public Boolean update(Integer id, ArticleDto dto) {
         ArticleEntity entity = get(id);
         if (entity == null) {
             throw new ItemNotFoundException("Article not found");
@@ -80,11 +102,11 @@ public class ArticleService {
         entity.setImageId(dto.getImageId());
         entity.setRegionId(dto.getRegionId());
         entity.setCategoryId(dto.getCategoryId());
-        entity.setStatus(ArticleStatus.NOTPUBLISHED);
+        entity.setStatus(ArticleStatus.NOT_PUBLISHED);
 
         articleRepository.save(entity);
         return true;
-    }
+    }*/
     public Boolean changeStatusById(Integer id) {
         ArticleEntity entity = get(id);
         if (entity == null) {
