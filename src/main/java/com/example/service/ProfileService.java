@@ -11,7 +11,6 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -107,13 +106,13 @@ public class ProfileService {
         }
          return dtoList;
     }
-    public Boolean deleteById(Integer id) {
+    public Boolean deleteById(Integer adminId, Integer id) {
         ProfileEntity entity = get(id);
         if (entity == null) {
             throw new ItemNotFoundException("Profile not found.");
         }
         entity.setVisible(false);
-        entity.setPrtId(4);
+        entity.setPrtId(adminId);
         profileRepository.save(entity);
         return true;
     }

@@ -1,7 +1,10 @@
 package com.example.controller;
 
+import com.example.dto.JwtDto;
 import com.example.dto.attach.AttachDto;
+import com.example.enums.ProfileRole;
 import com.example.service.AttachService;
+import com.example.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -57,7 +60,10 @@ public class AttachController {
     @GetMapping("/list-paging")
     public ResponseEntity<Page<AttachDto>> getAllWithPagination(
             @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "size", defaultValue = "3") int size) {
+            @RequestParam(value = "size", defaultValue = "3") int size,
+            @RequestHeader("Authorization") String authorization) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
+
         return ResponseEntity.ok(attachService.getAll(page, size));
     }
 

@@ -1,5 +1,6 @@
 package com.example.dto.category;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,5 +8,6 @@ import lombok.Setter;
 @Setter
 public class CategoryLangDto {
     private Integer id;
+    @NotNull(message = " name required")
     private String name;
 }

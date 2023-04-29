@@ -29,7 +29,9 @@ public class ProfileController {
     @GetMapping("/list-paging")
     public ResponseEntity<Page<ProfileDto>> getAllWithPagination(
             @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "size", defaultValue = "3") int size) {
+            @RequestParam(value = "size", defaultValue = "3") int size,
+            @RequestHeader("Authorization") String authorization) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
         return ResponseEntity.ok(profileService.getAll(page, size));
     }
 
@@ -39,13 +41,17 @@ public class ProfileController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(profileService.deleteById(id));
+    public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id,
+                                              @RequestHeader("Authorization") String authorization) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
+        return ResponseEntity.ok(profileService.deleteById(id, jwtDTO.getId()));
     }
 
     @PutMapping("/updateAdmin/{id}")
     public ResponseEntity<Boolean> updateAdmin(@PathVariable ("id") Integer id,
-                                               @RequestBody ProfileDto profileDto) {
+                                               @RequestBody ProfileDto profileDto,
+                                               @RequestHeader("Authorization") String authorization) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
         return ResponseEntity.ok(profileService.updateAdmin(id, profileDto));
     }
 
