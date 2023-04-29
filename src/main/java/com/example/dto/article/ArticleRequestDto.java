@@ -18,10 +18,14 @@ public class ArticleRequestDto {
     private String description;
     @NotEmpty(message = "Content qani")
     private String content;
+    @NotNull(message = " Attach required")
     private Integer attachId;
+    @NotNull(message = " Region required")
     private Integer regionId;
+    @NotNull(message = " Category required")
     private Integer categoryId;
-    @NotEmpty(message = "Should provide value")
-    private List<Integer> typeList;
-
+    @NotNull(message = " articleType required")
+    private Integer articleTypeId;
+//    @NotEmpty(message = "Should provide value")
+//    private List<Integer> typeList;
 }

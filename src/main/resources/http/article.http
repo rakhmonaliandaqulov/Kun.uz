@@ -1,14 +1,13 @@
-### Article create
-POST http://localhost:8080/api/v1/article/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI0MjUxNjQsImlkIjozLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgyNTExNTY0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.NrQJvrFzMESADqdpyDQFI31CM968e9qQSgH69p9D8-Rqzw9wh7lf7LVyCkRv6yBz7rDx4PYgfnaKFda_EM9q3A
-Content-Type: application/json
+### Create article
+POST localhost:8080/api/v1/article
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODE2NDAwMTksImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODE3MjY0MTksImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.Lk2Apu8oMBWD9rCRsIuOiZeWcy1staS-o5x_SwGbSt8kGfSWZsHUdRNQxGRVTdTMW3dhKtMLb2vIlaTVXrVLrA
 
 {
-  "title": "Referendum",
-  "description": "hamma qatnashishi shart",
-  "content": "30 moddaga ovoz bering",
-  "sharedCount": 123,
-  "imageId": 124,
-  "regionId": 3,
-  "categoryId": 3
+  "title": "asdasdas",
+  "description": "dasdasdasdas",
+  "content": "    ",
+  "attachId": 1,
+  "typeList": [1,2,3,4,5]
+
 }
