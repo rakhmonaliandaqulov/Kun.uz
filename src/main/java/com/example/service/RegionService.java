@@ -19,8 +19,8 @@ import java.util.Optional;
 public class RegionService {
     @Autowired
     private RegionRepository regionRepository;
-    public Integer create(RegionDto dto, Integer adminId) {
 
+    public Integer create(RegionDto dto, Integer adminId) {
         RegionEntity entity = new RegionEntity();
         entity.setNameUz(dto.getNameUz());
         entity.setNameRu(dto.getNameRU());
@@ -33,34 +33,30 @@ public class RegionService {
         dto.setId(entity.getId());
         return entity.getId();
     }
+
     public Boolean update(Integer id, RegionDto regionDto) {
         RegionEntity entity = get(id);
-        if (entity == null) {
-            throw new ItemNotFoundException("Region not found");
-        }
         entity.setNameUz(regionDto.getNameUz());
         entity.setNameRu(regionDto.getNameRU());
         entity.setNameEng(regionDto.getNameEng());
-
         regionRepository.save(entity);
         return true;
     }
+
     public RegionEntity get(Integer id) {
         Optional<RegionEntity> optional = regionRepository.findById(id);
         if (optional.isEmpty()) {
-            throw new ItemNotFoundException("Article not found: " + id);
+            throw new ItemNotFoundException("Item not found: " + id);
         }
         return optional.get();
     }
 
-    public Boolean deleteById(Integer id) {
-        RegionEntity entity = get(id);
-        if (entity == null) {
-            throw new ItemNotFoundException("Profile not found.");
-        }
+    public Boolean deleteById(Integer id, Integer prtId) {
+        int effectedRows = regionRepository.updateVisible(id, prtId);
+       /* RegionEntity entity = get(id);
         entity.setVisible(false);
-        entity.setPrtId(4);
-        regionRepository.save(entity);
+        entity.setPrtId(prtId);
+        regionRepository.save(entity);*/
         return true;
     }
 
@@ -90,7 +86,6 @@ public class RegionService {
         }
         throw new ItemNotFoundException("ArticleType is empty");
     }
-
     public List<RegionLangDto> getLang(String lang) {
         List<RegionLangDto> list = new LinkedList<>();
 

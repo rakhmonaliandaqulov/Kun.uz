@@ -22,12 +22,7 @@ public class ProfileController {
     @PostMapping({"", "/"})
     public ResponseEntity<ProfileDto> create(@RequestBody ProfileDto dto,
                                              @RequestHeader("Authorization") String authorization) {
-        String[] str = authorization.split(" ");
-        String jwt = str[1];
-        JwtDto jwtDTO = JwtUtil.decode(jwt);
-        if (!jwtDTO.getRole().equals(ProfileRole.ADMIN)) {
-            throw new MethodNotAllowedException("Method not allowed");
-        }
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
         return ResponseEntity.ok(profileService.create(dto, jwtDTO.getId()));
     }
 

@@ -19,8 +19,8 @@ import java.util.Optional;
 public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
-    public Integer create(CategoryDto dto, Integer adminId) {
 
+    public Integer create(CategoryDto dto, Integer adminId) {
         CategoryEntity entity = new CategoryEntity();
         entity.setNameUz(dto.getNameUz());
         entity.setNameRu(dto.getNameRU());
@@ -29,38 +29,33 @@ public class CategoryService {
         entity.setVisible(true);
         entity.setPrtId(adminId);
         categoryRepository.save(entity); // save profile
-
         dto.setId(entity.getId());
         return entity.getId();
     }
+
     public Boolean update(Integer id, CategoryDto categoryDto) {
         CategoryEntity entity = get(id);
-        if (entity == null) {
-            throw new ItemNotFoundException("Region not found");
-        }
         entity.setNameUz(categoryDto.getNameUz());
         entity.setNameRu(categoryDto.getNameRU());
         entity.setNameEng(categoryDto.getNameEng());
-
         categoryRepository.save(entity);
         return true;
     }
+
     public CategoryEntity get(Integer id) {
         Optional<CategoryEntity> optional = categoryRepository.findById(id);
         if (optional.isEmpty()) {
-            throw new ItemNotFoundException("Category not found: " + id);
+            throw new ItemNotFoundException("Item not found: " + id);
         }
         return optional.get();
     }
 
-    public Boolean deleteById(Integer id) {
-        CategoryEntity entity = get(id);
-        if (entity == null) {
-            throw new ItemNotFoundException("Profile not found.");
-        }
-        entity.setVisible(false);
-        entity.setPrtId(4);
-        categoryRepository.save(entity);
+    public Boolean deleteById(Integer id, Integer prtId) {
+        categoryRepository.updateVisible(id, prtId);
+//        CategoryEntity entity = get(id);
+//        entity.setVisible(false);
+//        entity.setPrtId(4);
+//        categoryRepository.save(entity);
         return true;
     }
 
@@ -68,27 +63,22 @@ public class CategoryService {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable paging = PageRequest.of(page - 1, size, sort);
         Page<CategoryEntity> pageObj = categoryRepository.findAll(paging);
-
-        Long totalCount = pageObj.getTotalElements();
+        long totalCount = pageObj.getTotalElements();
 
         List<CategoryEntity> entityList = pageObj.getContent();
         List<CategoryDto> dtoList = new LinkedList<>();
 
-        if (!pageObj.equals(null)) {
-            for (CategoryEntity entity : entityList) {
-                CategoryDto dto = new CategoryDto();
-                dto.setId(entity.getId());
-                dto.setNameUz(entity.getNameUz());
-                dto.setNameRU(entity.getNameRu());
-                dto.setNameEng(entity.getNameEng());
-                dto.setCreatedDate(entity.getCreatedDate());
-                dto.setVisible(entity.getVisible());
-                dtoList.add(dto);
-            }
-            Page<CategoryDto> response = new PageImpl<CategoryDto>(dtoList, paging, totalCount);
-            return response;
+        for (CategoryEntity entity : entityList) {
+            CategoryDto dto = new CategoryDto();
+            dto.setId(entity.getId());
+            dto.setNameUz(entity.getNameUz());
+            dto.setNameRU(entity.getNameRu());
+            dto.setNameEng(entity.getNameEng());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dto.setVisible(entity.getVisible());
+            dtoList.add(dto);
         }
-        throw new ItemNotFoundException("ArticleType is empty");
+        return new PageImpl<CategoryDto>(dtoList, paging, totalCount);
     }
 
     public List<CategoryLangDto> getLang(String lang) {
