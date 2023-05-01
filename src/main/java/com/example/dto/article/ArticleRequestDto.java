@@ -26,6 +26,6 @@ public class ArticleRequestDto {
     private Integer categoryId;
     @NotNull(message = " articleType required")
     private Integer articleTypeId;
-//    @NotEmpty(message = "Should provide value")
-//    private List<Integer> typeList;
+    @NotEmpty(message = "Should provide value")
+    private List<Integer> typeList;
 }
