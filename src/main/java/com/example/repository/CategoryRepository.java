@@ -1,10 +1,7 @@
 package com.example.repository;
 
 import com.example.entity.CategoryEntity;
-import com.example.entity.RegionEntity;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepository extends CrudRepository<CategoryEntity, Integer>,
+public interface CategoryRepository<C, S> extends CrudRepository<CategoryEntity, Integer>,
         PagingAndSortingRepository<CategoryEntity, Integer> {
     @Transactional
     @Modifying

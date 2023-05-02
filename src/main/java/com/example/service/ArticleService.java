@@ -6,16 +6,11 @@ import com.example.dto.article.ArticleRequestDto;
 import com.example.dto.article.ArticleShortInfoDto;
 import com.example.entity.*;
 import com.example.enums.ArticleStatus;
-import com.example.exps.ArticleNotFoundException;
 import com.example.exps.ItemNotFoundException;
 import com.example.mapper.ArticleShortInfoMapper;
 import com.example.repository.ArticleRepository;
 import com.example.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,7 +22,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ArticleService {
     private final ArticleRepository articleRepository;
-    private final CategoryRepository categoryRepository;
+    private final CategoryRepository<C, S> categoryRepository;
     private final ProfileService profileService;
     private final RegionService regionService;
     private final CategoryService categoryService;
