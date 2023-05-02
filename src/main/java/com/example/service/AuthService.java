@@ -45,8 +45,8 @@ public class AuthService {
         return responseDTO;
     }
     public ProfileDto registration(ProfileDto dto) {
-        Optional<ProfileEntity> optional = profileRepository.findByPhoneAndPassword(dto.getPhone(), dto.getPassword());
-        if (!optional.isEmpty()) {
+        Optional<ProfileEntity> optional = profileRepository.findByEmail(dto.getEmail());
+        if (optional.isPresent()) {
             throw new ItemNotFoundException("There is such a user!");
         }
         ProfileEntity entity = new ProfileEntity();
@@ -64,31 +64,6 @@ public class AuthService {
         dto.setId(entity.getId());
         return dto;
     }
-
-    public void isValidProfile(ProfileDto dto) {
-        // throw ...
-    }
-    public RegistrationResponseDto registrationo(RegistrationDto dto) {
-        // check -?
-        Optional<ProfileEntity> optional = profileRepository.findByEmail(dto.getEmail());
-        if (optional.isPresent()) {
-            throw new ItemNotFoundException("Email already exists mazgi.");
-        }
-        ProfileEntity entity = new ProfileEntity();
-        entity.setName(dto.getName());
-        entity.setSurname(dto.getSurname());
-        entity.setRole(ProfileRole.USER);
-        entity.setPhone(dto.getPhone());
-        entity.setEmail(dto.getEmail());
-        entity.setPassword(MD5Util.getMd5Hash(dto.getPassword()));
-        entity.setStatus(GeneralStatus.REGISTER);
-        profileRepository.save(entity);
-
-        mailSenderService.sendEmail(dto.getEmail(), "Sending email", "Mazgimisan");
-        String s = "Verification link was send to email: " + dto.getEmail();
-        return new RegistrationResponseDto(s);
-    }
-
     public RegistrationResponseDto emailVerification(String jwt) {
         // asjkdhaksdh.daskhdkashkdja
         String email = JwtUtil.decodeEmailVerification(jwt);
@@ -104,7 +79,6 @@ public class AuthService {
         profileRepository.save(entity);
         return new RegistrationResponseDto("Registration Done");
     }
-
     public RegistrationResponseDto registration(RegistrationDto dto) {
         // check -?
         Optional<ProfileEntity> optional = profileRepository.findByEmail(dto.getEmail());

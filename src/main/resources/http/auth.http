@@ -6,6 +6,14 @@ Content-Type: application/json
   "email": "admin@mail.ru",
   "password": "123456"
 }
+### Login 2
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "hcgvjbkn@mail.ru",
+  "password": "09876"
+}
 
 ### Registration
 POST http://localhost:8080/api/v1/auth/registration
@@ -14,7 +22,7 @@ Content-Type: application/json
 {
   "name": "Toshmat",
   "surname": "Toshmatov",
-  "email": "toshmat234@gmail.com",
+  "email": "toshmat234@gmail.ru",
   "phone": "991234567",
   "password": "2211"
 
@@ -25,9 +33,9 @@ POST localhost:8080/api/v1/auth/register
 Content-Type:  application/json
 
 {
-  "name": "Alish",
-  "surname": "Aliyev",
-  "phone": "1213",
-  "email": "rakhmonaliandaqulov@gmail.com",
-  "password": "123456"
+  "name": "dfdfas",
+  "surname": "asdfdfs",
+  "phone": "2345",
+  "email": "gfds.@gmail.ru",
+  "password": "3245"
 }

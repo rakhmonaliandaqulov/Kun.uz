@@ -31,7 +31,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
             entity.setPassword(MD5Util.getMd5Hash("12345"));
             entity.setStatus(GeneralStatus.ACTIVE);
             profileRepository.save(entity);
-            System.out.println("Amdin created");
+            System.out.println("Admin created");
         }
 
     }

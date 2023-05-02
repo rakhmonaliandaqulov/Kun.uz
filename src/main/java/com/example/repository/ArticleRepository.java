@@ -7,8 +7,10 @@ import com.example.entity.RegionEntity;
 import com.example.enums.ArticleStatus;
 import com.example.mapper.ArticleShortInfoMapper;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -54,4 +56,13 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
             " FROM article AS a  where  a.type_id =:t_id and status =:status order by created_date desc Limit :limit",
             nativeQuery = true)
     List<ArticleShortInfoMapper> find5ByTypeIdNative(@Param("t_id") Integer t_id, @Param("status") String status, @Param("limit") Integer limit);
+
+    @Transactional
+    @Modifying
+    @Query("update ArticleEntity set visible = false where id = :id")
+    int deleteArticle(@Param("id") String id);
+    @Transactional
+    @Modifying
+    @Query("update ArticleEntity set status = :status where id = :id")
+    int changeStatus(@Param("status") ArticleStatus status, @Param("id") String id);
 }

@@ -36,10 +36,6 @@ public class ArticleService {
 
 
     public ArticleRequestDto create(ArticleRequestDto dto, Integer moderId) {
-        // check
-        ProfileEntity moderator = profileService.get(moderId);
-        RegionEntity region = regionService.get(dto.getRegionId());
-        CategoryEntity category = categoryService.get(dto.getCategoryId());
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
@@ -48,12 +44,10 @@ public class ArticleService {
         entity.setRegionId(dto.getRegionId());
         entity.setCategoryId(dto.getCategoryId());
         entity.setAttachId(dto.getAttachId());
-        // type
+        entity.setTypeId(dto.getArticleTypeId());
         articleRepository.save(entity);
         return dto;
     }
-
-
     public ArticleRequestDto update(ArticleRequestDto dto, String id) {
         ArticleEntity entity = get(id);
         entity.setTitle(dto.getTitle());
@@ -66,25 +60,20 @@ public class ArticleService {
         articleRepository.save(entity);
         return dto;
     }
-
-    public boolean delete(Integer id) {
-//        ArticleEntity entity = articleRepository.findById(id).orElse(null);
-//        if (entity == null) {
-//            throw new RuntimeException("this article is null");
-//        }
+    public Boolean delete(String id) {
+//        ArticleEntity entity = get(id);
 //        entity.setVisible(false);
 //        articleRepository.save(entity);
+        articleRepository.deleteArticle(id);
         return true;
     }
-
-    public String changeStatus(ArticleStatus status, Integer id) {
-//        ArticleEntity entity = articleRepository.findById(id).orElse(null);
-//        if (entity == null) {
-//            throw new RuntimeException("entity is null");
-//        }
-//        entity.setStatus(status);
-//        articleRepository.save(entity);
-        return "changed !!! ";
+    public Boolean changeStatus(ArticleStatus status, String id) {
+        /*ArticleEntity entity = get(id);
+        entity.setStatus(status);
+        articleRepository.save(entity);
+        return "changed !!! ";*/
+        articleRepository.changeStatus(status, id);
+        return true;
     }
 
     public ArticleEntity DTOToEntity(ArticleRequestDto dto) {
@@ -133,13 +122,6 @@ public class ArticleService {
         return dtoList;
     }
 
-    public ArticleEntity get(String id){
-        Optional<ArticleEntity> optional = articleRepository.findById(id);
-        if (optional.isEmpty()) {
-            throw new ArticleNotFoundException("article not found");
-        }
-        return optional.get();
-    }
 
     public ArticleInfoDto articleFullInfo(String id, String lang) {
         ArticleEntity entity = get(id);
@@ -155,40 +137,40 @@ public class ArticleService {
         return dto;
     }
 
-    public List<ArticleShortInfoDto> articleShortInfo() {
-        List<ArticleEntity> entityList = articleRepository.mostReadArticles();
-        List<ArticleShortInfoDto> dtoList = new LinkedList<>();
-        for (ArticleEntity entity : entityList) {
-            dtoList.add(toShortInfo(entity));
-        }
-        return dtoList;
-    }
+//    public List<ArticleShortInfoDto> articleShortInfo() {
+//        List<ArticleEntity> entityList = articleRepository.mostReadArticles();
+//        List<ArticleShortInfoDto> dtoList = new LinkedList<>();
+//        for (ArticleEntity entity : entityList) {
+//            dtoList.add(toShortInfo(entity));
+//        }
+//        return dtoList;
+//    }
 
-    public ArticleShortInfoDto toShortInfo(ArticleEntity entity) {
-        ArticleShortInfoDto dto = new ArticleShortInfoDto();
-        dto.setAttach(entity.getAttach());
-        dto.setId(entity.getId());
-        dto.setPublishedDate(entity.getPublishedDate());
-        dto.setDescription(entity.getDescription());
-        dto.setTitle(entity.getTitle());
-        return dto;
-    }
+//    public ArticleShortInfoDto toShortInfo(ArticleEntity entity) {
+//        ArticleShortInfoDto dto = new ArticleShortInfoDto();
+//        dto.setAttach(entity.getAttach());
+//        dto.setId(entity.getId());
+//        dto.setPublishedDate(entity.getPublishedDate());
+//        dto.setDescription(entity.getDescription());
+//        dto.setTitle(entity.getTitle());
+//        return dto;
+//    }
 
 
-    public List<ArticleShortInfoDto> getRegionArticle(Integer id, int size, int page) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
-        Pageable pageable = PageRequest.of(page - 1, size, sort);
-        Page<ArticleEntity> entityPage = articleRepository.findByRegionId(id, pageable);
-        long totalCount = entityPage.getTotalElements();
-        List<ArticleEntity> entityList = entityPage.getContent();
-        List<ArticleShortInfoDto> dtoList = new LinkedList<>();
-        for (ArticleEntity entity : entityList) {
-            dtoList.add(toShortInfo(entity));
-        }
-        return dtoList;
-    }
+//    public List<ArticleShortInfoDto> getRegionArticle(Integer id, int size, int page) {
+//        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+//        Pageable pageable = PageRequest.of(page - 1, size, sort);
+//        Page<ArticleEntity> entityPage = articleRepository.findByRegionId(id, pageable);
+//        long totalCount = entityPage.getTotalElements();
+//        List<ArticleEntity> entityList = entityPage.getContent();
+//        List<ArticleShortInfoDto> dtoList = new LinkedList<>();
+//        for (ArticleEntity entity : entityList) {
+//            dtoList.add(toShortInfo(entity));
+//        }
+//        return dtoList;
+//    }
 
-    public List<ArticleShortInfoDto> get5CategoryArticle(Integer id) {
+   /* public List<ArticleShortInfoDto> get5CategoryArticle(Integer id) {
         CategoryEntity category = categoryService.get(id);
         List<ArticleEntity> entityList = articleRepository.get5CategoryArticle(category);
         List<ArticleShortInfoDto> dtoList = new LinkedList<>();
@@ -205,7 +187,7 @@ public class ArticleService {
             dtoList.add(toShortInfo(entity));
         }
         return dtoList;
-    }
+    }*/
 
 
     public Boolean changeStatus(ArticleStatus status, String id, Integer prtId) {

@@ -1,14 +1,14 @@
 ### Create article
 POST localhost:8080/api/v1/article
 Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI3NzQ1MDEsImlkIjozLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgyODYwOTAxLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.kb07x6zSklEzULaNNd2wTFj_bGMNh_mPkn6HCdEwDmLcCLXIdcRTnCnsqWGgL_m49Axq2DX9m3jL-2MKEp4iOg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5OTI0ODUsImlkIjo0LCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMDc4ODg1LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.TKMFHR6doV4-opnfNz1RB53Vpp-v9kwqdLepGVW9avzXLGK15ErUBCRgrjvTHo4H81yhoB1nZQbsKHy4O5QcFw
 
 {
-  "title": "asdasdas",
-  "description": "dasdasdasdas",
-  "content": " sdfcxvcxvdcvcvsdvdff",
+  "title": "fdssafdsf",
+  "description": "asdfdsfdsdfs",
+  "content": "sdfsdfdsfsadfsdf",
   "attachId": 1,
-  "regionId": 3,
-  "categoryId": 7
-
+  "regionId": 2,
+  "categoryId": 3,
+  "articleTypeId": 1
 }

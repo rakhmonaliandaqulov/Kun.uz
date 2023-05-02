@@ -7,6 +7,7 @@ import com.example.dto.article.ArticleInfoDto;
 import com.example.dto.article.ArticleRequestDto;
 import com.example.dto.article.ArticleShortInfoDto;
 import com.example.dto.articleType.ArticleTypeDto;
+import com.example.entity.ArticleEntity;
 import com.example.enums.ArticleStatus;
 import com.example.enums.ProfileRole;
 import com.example.exps.MethodNotAllowedException;
@@ -41,15 +42,15 @@ public class ArticleController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Integer id,
+    public ResponseEntity<Boolean> delete(@PathVariable("id") String id,
                                     @RequestHeader("Authorization") String authorization) {
         JwtDto jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR, ProfileRole.ADMIN);
         return ResponseEntity.ok(articleService.delete(id));
     }
 
     @PostMapping("/change-status/{id}")
-    public ResponseEntity<?> changeStatus(@PathVariable("id") Integer id,
-                                          @RequestParam String status,
+    public ResponseEntity<Boolean> changeStatus(@PathVariable("id") String id,
+                                          @RequestParam String  status,
                                           @RequestHeader("Authorization") String authorization) {
         JwtDto jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.PUBLISHER);
         return ResponseEntity.ok(articleService.changeStatus(ArticleStatus.valueOf(status), id));
@@ -71,7 +72,7 @@ public class ArticleController {
         ArticleInfoDto dto = articleService.articleFullInfo(id, lang);
         return ResponseEntity.ok(dto);
     }
-    @GetMapping("/4-article-by-types")
+   /* @GetMapping("/4-article-by-types")
     public ResponseEntity<List<ArticleShortInfoDto>> get4ArticleByTypes(@RequestParam("typeId") Integer typeId,
                                                                         @RequestParam("id") String id) {
         List<ArticleShortInfoDto> list = articleService.get4ArticleByTypes(typeId, id);
@@ -92,6 +93,6 @@ public class ArticleController {
     public ResponseEntity<List<ArticleShortInfoDto>> get5CategoryArticle(@PathVariable Integer id) {
         List<ArticleShortInfoDto> list = articleService.get5CategoryArticle(id);
         return ResponseEntity.ok(list);
-    }
+    }*/
 
 }
