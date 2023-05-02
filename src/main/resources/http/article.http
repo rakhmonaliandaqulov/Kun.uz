@@ -1,14 +1,83 @@
 ### Create article
 POST localhost:8080/api/v1/article
 Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5OTI0ODUsImlkIjo0LCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMDc4ODg1LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.TKMFHR6doV4-opnfNz1RB53Vpp-v9kwqdLepGVW9avzXLGK15ErUBCRgrjvTHo4H81yhoB1nZQbsKHy4O5QcFw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjQxMjgsImlkIjoxMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzAxMDUyOCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.2f6v6QXLI6uO4bjzn7lfZiB_9XqOjBEuvyC_vnYb2UDeIU6M3zC1-lmTenDJO5rdq1Mjv1RQK6hDLsb-VStvSg
 
 {
-  "title": "fdssafdsf",
-  "description": "asdfdsfdsdfs",
-  "content": "sdfsdfdsfsadfsdf",
-  "attachId": "5aceb7fb-1790-4b20-878d-eb5a669c0895",
-  "regionId": 2,
+  "title": "dsfghtg",
+  "description": "aesrdtr",
+  "content": "erethgf",
+  "attachId": "ce09e94c-370d-465a-8f3a-c97bcfa04465",
+  "regionId": 1,
   "categoryId": 3,
-  "articleTypeId": 1
+  "typeId": 3
 }
+
+### Update article
+POST localhost:8080/api/v1/article/e73d7881-a744-4d82-9a3c-36b29dea772d
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjQxMjgsImlkIjoxMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzAxMDUyOCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.2f6v6QXLI6uO4bjzn7lfZiB_9XqOjBEuvyC_vnYb2UDeIU6M3zC1-lmTenDJO5rdq1Mjv1RQK6hDLsb-VStvSg
+
+{
+  "title": "Yangi O'zbekiston referendumga tayyormi",
+  "description": "Yo'q",
+  "content": "65432",
+  "attachId": "b9c11bec-25dc-402e-af5c-52e7592af909",
+  "regionId": 3,
+  "categoryId": 2,
+  "articleTypeId": 3
+}
+
+### Delete article byId
+DELETE localhost:8080/api/v1/article/e73d7881-a744-4d82-9a3c-36b29dea772d
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjAxNTIsImlkIjozLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODMwMDY1NTIsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.CF8knCdnvSd3ab8LN46_R-6MQq0tad0WwHkqClW4UIfXR_QrTbFs3Jnl6xUblMOKSRXZ52DuMKWPpQLqWuCqcA
+
+### Change article status byId
+POST localhost:8080/api/v1/article/change-status/0002c4ea-f54f-4764-8fe2-1373aff09144?status=PUBLISHED
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjYyNzEsImlkIjoxMiwicm9sZSI6IlBVQkxJU0hFUiIsImV4cCI6MTY4MzAxMjY3MSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.jtyRuWyGTazsDi4prxSyY3DR3UOCsK2QHms0NoRAHvK3EiaGJnzxMGrRJo6fD39x4BIbc5AzNyfLh-fSquJQwg
+Content-Type:  application/json
+
+### Article List 5
+GET localhost:8080/api/v1/article/type/1/five
+Content-Type: application/json
+
+### Article List 3
+GET localhost:8080/api/v1/article/type/1/three
+Content-Type: application/json
+
+### Article 8 last without array
+GET localhost:8080/api/v1/article/get-last8
+Content-Type: application/json
+
+{
+  "list": ["0002c4ea-f54f-4764-8fe2-1373aff09144", "a2a9372f-58d0-495e-98c3-838bb35fc7cc", "3d8cceed-15c2-4a78-93f7-1a57ebbccdec"]
+}
+
+### Get article by id and lang
+GET localhost:8080/api/v1/article/get-id-lang?id=f0e35734-7509-49a5-9026-92a8c75d436b&language=uz
+
+### Article last 4 without given id
+GET localhost:8080/api/v1/article/get-last4?id=f0e35734-7509-49a5-9026-92a8c75d436b
+
+### Article last 4 most view
+GET localhost:8080/api/v1/article/get-last4view
+
+
+### Get last 5 article by type id and region id
+GET localhost:8080/api/v1/article/get5by-type-region?type=3&region=1
+
+
+### Get last 5 article by category id
+GET localhost:8080/api/v1/article/get5by-category?category=3
+
+
+### Get Article By RegionId Pagination
+GET localhost:8080/api/v1/article/paging?page=1&size=6&id=1
+
+
+### Get Article By CategoryId Pagination
+GET localhost:8080/api/v1/article/paging-category?page=1&size=6&id=1
+
+### Increase article view count
+GET localhost:8080/api/v1/article/view-count?id=d8be8200-7449-4bb7-84f9-d4a9657f3da8
+

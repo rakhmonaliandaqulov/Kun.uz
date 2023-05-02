@@ -15,8 +15,8 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/create")
-    public ResponseEntity<CommentDto> create(@RequestBody CommentDto commentDto){
-        return ResponseEntity.ok(commentService.create(commentDto));
+    public ResponseEntity<CommentDto> create(@RequestBody CommentDto dto){
+        return ResponseEntity.ok(commentService.create(dto));
     }
 
     @DeleteMapping("/delete/{id}")

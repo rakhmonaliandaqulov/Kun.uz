@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class SavedArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Integer id;
+    private String id;
 
     @Column(name = "profile_id")
     private Integer profileId;
