@@ -50,7 +50,6 @@ public class AttachService {
         }
         return null;
     }
-
     public String saveToSystem2(MultipartFile file) {
         try {
             File folder = new File("attaches");
@@ -78,7 +77,6 @@ public class AttachService {
         }
         return null;
     }
-
     public AttachDto saveToSystem3(MultipartFile file) {
         try {
             String pathFolder = getYmDString(); // 2022/04/23

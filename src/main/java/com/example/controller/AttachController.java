@@ -21,9 +21,8 @@ public class AttachController {
     private AttachService attachService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
-        String fileName = attachService.saveToSystem2(file);
-        return ResponseEntity.ok().body(fileName);
+    public ResponseEntity<AttachDto> upload(@RequestParam("file") MultipartFile file) {
+        return ResponseEntity.ok(attachService.saveToSystem3(file));
     }
 
     @GetMapping(value = "/open/{fileName}", produces = MediaType.IMAGE_PNG_VALUE)

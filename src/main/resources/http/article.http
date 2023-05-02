@@ -7,7 +7,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5OTI0ODUsImlkIjo0LCJyb
   "title": "fdssafdsf",
   "description": "asdfdsfdsdfs",
   "content": "sdfsdfdsfsadfsdf",
-  "attachId": 1,
+  "attachId": "5aceb7fb-1790-4b20-878d-eb5a669c0895",
   "regionId": 2,
   "categoryId": 3,
   "articleTypeId": 1

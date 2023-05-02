@@ -5,10 +5,10 @@ Content-Type: multipart/form-data; boundary=WebAppBoundary
 --WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="test_imge_1.jpg"
 
-< /Users/macuser/Desktop/rezyume.png
+< /Users/macuser/Downloads/test_imge_1.jpg
 
 ###  Attach get photo by name
-GET http://localhost:8080/api/v1/attach/open/f2dcca31-d1ab-460d-99c9-c32a18f9f9f4.png
+GET http://localhost:8080/api/v1/attach/open/5aceb7fb-1790-4b20-878d-eb5a669c0895.jpg
 
 ### video
 POST http://localhost:8080/api/v1/attach/upload
@@ -22,7 +22,7 @@ Content-Disposition: form-data; name="file"; filename="333.mp4"
 #< C:\Users\BigMan\Desktop\11\test_imge_1.jpg
 
 ###  Attach get video by name
-GET http://localhost:8080/api/v1/attach/open_general/59b4c377-6ef6-465d-8142-ef41eb479d2c
+GET http://localhost:8080/api/v1/attach/open_general/5aceb7fb-1790-4b20-878d-eb5a669c0895.jpg
 
 ###
 GET http://localhost:8080/api/v1/attach/list-paging
