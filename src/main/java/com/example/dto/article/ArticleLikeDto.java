@@ -1,4 +1,4 @@
-package com.example.dto.comment;
+package com.example.dto.article;
 
 import com.example.enums.LikeStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CommentLikeDto {
+public class ArticleLikeDto {
     private Integer id;
     private Integer profileId;
     private String articleId;

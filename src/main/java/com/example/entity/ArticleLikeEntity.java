@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import com.example.enums.LikeStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +11,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "comment_like")
-public class CommentLikeEntity {
+@Table(name = "article_like")
+public class ArticleLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

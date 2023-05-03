@@ -1,5 +1,5 @@
 package com.example.enums;
 
-public enum CommentStatus {
+public enum LikeStatus {
     LIKE, NOT_LIKE;
 }
