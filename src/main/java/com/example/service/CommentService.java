@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.dto.CommentDto;
+import com.example.dto.comment.CommentDto;
 import com.example.entity.ArticleEntity;
 import com.example.entity.CommentEntity;
 import com.example.entity.ProfileEntity;
