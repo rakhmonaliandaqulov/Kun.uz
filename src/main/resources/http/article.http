@@ -1,83 +1,67 @@
-### Create article
-POST localhost:8080/api/v1/article
-Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjQxMjgsImlkIjoxMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzAxMDUyOCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.2f6v6QXLI6uO4bjzn7lfZiB_9XqOjBEuvyC_vnYb2UDeIU6M3zC1-lmTenDJO5rdq1Mjv1RQK6hDLsb-VStvSg
+### create article
+POST localhost:8080/api/v1/article/
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI3NTA2MDAsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MjgzNzAwMCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.c7OMEp_IJrAh5MHHrbEyc4gpGXdLHBB2TuinPufgRg_ZFNWDvfCJb7r232FleHg_RerdJNGO-r3FRn0tE0d9pA
+Content-Type: application/json
 
 {
-  "title": "dsfghtg",
-  "description": "aesrdtr",
-  "content": "erethgf",
-  "attachId": "ce09e94c-370d-465a-8f3a-c97bcfa04465",
-  "regionId": 1,
-  "categoryId": 3,
+  "title": "Sdfvdfvcxsdfvddfgfsvvcdsf ",
+  "description": "dfvbsm, ;ljg bflkmx dlk;mgvc ",
+  "content": "dfgl,ml;df;ld;fldfdl,;fldsfdfl;fg;lf;l,gfgl;dfmjklnjk ;fdgc ",
+  "categoryId": 1,
+  "regionId": 2,
   "typeId": 3
 }
 
-### Update article
-POST localhost:8080/api/v1/article/e73d7881-a744-4d82-9a3c-36b29dea772d
-Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjQxMjgsImlkIjoxMCwicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzAxMDUyOCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.2f6v6QXLI6uO4bjzn7lfZiB_9XqOjBEuvyC_vnYb2UDeIU6M3zC1-lmTenDJO5rdq1Mjv1RQK6hDLsb-VStvSg
+### update article
+
+POST localhost:8080/api/v1/article/update/6619a2aa-2198-416c-818d-7b66b5211b31
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI3NTA2MDAsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MjgzNzAwMCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.c7OMEp_IJrAh5MHHrbEyc4gpGXdLHBB2TuinPufgRg_ZFNWDvfCJb7r232FleHg_RerdJNGO-r3FRn0tE0d9pA
+Content-Type: application/json
 
 {
-  "title": "Yangi O'zbekiston referendumga tayyormi",
-  "description": "Yo'q",
-  "content": "65432",
-  "attachId": "b9c11bec-25dc-402e-af5c-52e7592af909",
-  "regionId": 3,
+  "title": "efvdsm, ewlkvds ,.",
+  "description": "elfm krkoelmdslc,.xcm",
+  "content": "wrkjvefmefmfdkdkdkdk",
   "categoryId": 2,
-  "articleTypeId": 3
+  "regionId": 1,
+  "typeId": 1,
+  "imageId": 3,
+  "visible": true
 }
 
-### Delete article byId
-DELETE localhost:8080/api/v1/article/e73d7881-a744-4d82-9a3c-36b29dea772d
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjAxNTIsImlkIjozLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODMwMDY1NTIsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.CF8knCdnvSd3ab8LN46_R-6MQq0tad0WwHkqClW4UIfXR_QrTbFs3Jnl6xUblMOKSRXZ52DuMKWPpQLqWuCqcA
+### delete article update visible to false
+DELETE localhost:8080/api/v1/article/delete/bc78aaa6-ab91-440c-9972-49c4f2887ef0
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI3NTA2MDAsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MjgzNzAwMCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.c7OMEp_IJrAh5MHHrbEyc4gpGXdLHBB2TuinPufgRg_ZFNWDvfCJb7r232FleHg_RerdJNGO-r3FRn0tE0d9pA
 
-### Change article status byId
-POST localhost:8080/api/v1/article/change-status/0002c4ea-f54f-4764-8fe2-1373aff09144?status=PUBLISHED
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjYyNzEsImlkIjoxMiwicm9sZSI6IlBVQkxJU0hFUiIsImV4cCI6MTY4MzAxMjY3MSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.jtyRuWyGTazsDi4prxSyY3DR3UOCsK2QHms0NoRAHvK3EiaGJnzxMGrRJo6fD39x4BIbc5AzNyfLh-fSquJQwg
-Content-Type:  application/json
+###Change status by id (PUBLISHER) (publish,not_publish)
+PUT localhost:8080/api/v1/article/publish/dc9c0983-7e3e-4144-b950-6b051ab2ac8f?status = PUBLISHED
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI3NTIwNjIsImlkIjoxNCwicm9sZSI6IlBVQkxJU0hFUiIsImV4cCI6MTY4MjgzODQ2MiwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.bloIUJRZbWDtc9bgp4YaP9R6lvju4zBrHLl9QkfnV98027bHw7q-mTARKO2ylJdoTsUhYhvw5DZd8r3kNPczGQ
 
-### Article List 5
-GET localhost:8080/api/v1/article/type/1/five
-Content-Type: application/json
+###  Get Last 5 Article By Types  ordered_by_created_date
+GET localhost:8080/api/v1/article/publish/5/2
+### Get Last 3 Article By Types  ordered_by_created_date
+GET localhost:8080/api/v1/article/publish/3/2
+### get top 8
+GET localhost:8080/api/v1/article/publish/8/2
+### Get Article By Id And Lang
+GET localhost:8080/api/v1/article/publish?id=dc9c0983-7e3e-4144-b950-6b051ab2ac8f&lang=en
 
-### Article List 3
-GET localhost:8080/api/v1/article/type/1/three
-Content-Type: application/json
-
-### Article 8 last without array
-GET localhost:8080/api/v1/article/get-last8
-Content-Type: application/json
-
-{
-  "list": ["0002c4ea-f54f-4764-8fe2-1373aff09144", "a2a9372f-58d0-495e-98c3-838bb35fc7cc", "3d8cceed-15c2-4a78-93f7-1a57ebbccdec"]
-}
-
-### Get article by id and lang
-GET localhost:8080/api/v1/article/get-id-lang?id=f0e35734-7509-49a5-9026-92a8c75d436b&language=uz
-
-### Article last 4 without given id
-GET localhost:8080/api/v1/article/get-last4?id=f0e35734-7509-49a5-9026-92a8c75d436b
-
-### Article last 4 most view
-GET localhost:8080/api/v1/article/get-last4view
+###  Get Last 4 Article By Types and except given article id.
+GET localhost:8080/api/v1/article/publish/4?articleId=dc9c0983-7e3e-4144-b950-6b051ab2ac8f&typeId=2
+### Get 4 most read articles
+GET localhost:8080/api/v1/article/publish/top/4
 
 
-### Get last 5 article by type id and region id
-GET localhost:8080/api/v1/article/get5by-type-region?type=3&region=1
+###Get Last 5 Article By Types  And By Region Key
+GET localhost:8080/api/v1/article/publish/region/5?regionId=1&typeId=2
 
 
-### Get last 5 article by category id
-GET localhost:8080/api/v1/article/get5by-category?category=3
+###Get Article list by Region Key (Pagination)
+GET localhost:8080/api/v1/article/publish/region?regionId=1&page=2&size=2
 
+### Get Last 5 Article Category Key
+GET localhost:8080/api/v1/article/publish/category/5/2
 
-### Get Article By RegionId Pagination
-GET localhost:8080/api/v1/article/paging?page=1&size=6&id=1
-
-
-### Get Article By CategoryId Pagination
-GET localhost:8080/api/v1/article/paging-category?page=1&size=6&id=1
-
-### Increase article view count
-GET localhost:8080/api/v1/article/view-count?id=d8be8200-7449-4bb7-84f9-d4a9657f3da8
+### Get Article By Category Key (Pagination)
+GET localhost:8080/api/v1/article/publish/category?categoryId=2&size=2
 

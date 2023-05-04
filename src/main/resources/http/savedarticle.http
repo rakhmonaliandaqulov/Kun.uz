@@ -1,0 +1,18 @@
+### create savedarticle
+
+POST localhost:8080/api/v1/savedArticle/
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5NjY0NDMsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzA1Mjg0MywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.0vq_H2JAGbCyGRGLtttebLKzQFEWllUVEKno5Nt2IEdzmvpwJo3rJuyZEG7C-yS3FJeyb_NByJql58My_rLkQw
+Content-Type: application/json
+
+{
+  "articleId":"d2ca3b62-d605-4266-b737-f9601e87101a"
+}
+
+### delete
+DELETE localhost:8080/api/v1/savedArticle/delete/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5NjY0NDMsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzA1Mjg0MywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.0vq_H2JAGbCyGRGLtttebLKzQFEWllUVEKno5Nt2IEdzmvpwJo3rJuyZEG7C-yS3FJeyb_NByJql58My_rLkQw
+
+
+### get List
+GET localhost:8080/api/v1/savedArticle/list
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5NjY0NDMsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzA1Mjg0MywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.0vq_H2JAGbCyGRGLtttebLKzQFEWllUVEKno5Nt2IEdzmvpwJo3rJuyZEG7C-yS3FJeyb_NByJql58My_rLkQw

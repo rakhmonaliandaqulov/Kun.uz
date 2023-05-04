@@ -1,14 +1,15 @@
 package com.example.mapper;
 
-import com.example.kunuz.dto.ArticleShortInfoDTO;
-import com.example.kunuz.entity.ArticleEntity;
+import com.example.dto.article.ArticleShortInfoDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SavedArticleShortInfoDTO {
     private Integer id;
-    private ArticleShortInfoDTO article;
+    private ArticleShortInfoDto article;
 
 }

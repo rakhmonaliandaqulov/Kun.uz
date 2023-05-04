@@ -13,3 +13,6 @@ DELETE localhost:8080/api/v1/comment/delete/4e97acbd-b71a-4728-a544-ebbcf9641748
 
 ### GET LIST BY ARTICLE ID
 GET localhost:8080/api/v1/comment/getList/51fc3e4b-c54b-409c-9423-0ce7c20c7fb2
+
+### get list
+GET localhost:8080/api/v1/comment/list

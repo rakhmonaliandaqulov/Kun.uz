@@ -1,0 +1,27 @@
+### create tag
+POST localhost:8080/api/v1/tag/
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5NjY0NDMsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzA1Mjg0MywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.0vq_H2JAGbCyGRGLtttebLKzQFEWllUVEKno5Nt2IEdzmvpwJo3rJuyZEG7C-yS3FJeyb_NByJql58My_rLkQw
+Content-Type: application/json
+
+{
+  "name": "Benzin"
+}
+
+### update tag by id
+POST localhost:8080/api/v1/tag/update/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5NjY0NDMsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzA1Mjg0MywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.0vq_H2JAGbCyGRGLtttebLKzQFEWllUVEKno5Nt2IEdzmvpwJo3rJuyZEG7C-yS3FJeyb_NByJql58My_rLkQw
+Content-Type: application/json
+
+{
+  "name": "Gaz"
+}
+
+### delete by id
+
+DELETE localhost:8080/api/v1/tag/delete/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5NjY0NDMsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzA1Mjg0MywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.0vq_H2JAGbCyGRGLtttebLKzQFEWllUVEKno5Nt2IEdzmvpwJo3rJuyZEG7C-yS3FJeyb_NByJql58My_rLkQw
+
+
+### get list
+GET localhost:8080/api/v1/tag/list?page=2&size=2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5NjY0NDMsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzA1Mjg0MywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.0vq_H2JAGbCyGRGLtttebLKzQFEWllUVEKno5Nt2IEdzmvpwJo3rJuyZEG7C-yS3FJeyb_NByJql58My_rLkQw

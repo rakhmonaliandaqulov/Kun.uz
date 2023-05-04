@@ -24,8 +24,6 @@ import java.util.Optional;
 
 @Repository
 public interface ArticleRepository extends CrudRepository<ArticleEntity, String> {
-    @Autowired
-    private EntityManager entityManager;
     Optional<ArticleEntity> findByTitle(String title);
     Optional<ArticleEntity> findById(String id);
     @Transactional

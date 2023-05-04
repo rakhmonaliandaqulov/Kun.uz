@@ -3,8 +3,8 @@ package com.example.repository;
 import com.example.dto.article.ArticleFilterDto;
 import com.example.entity.ArticleEntity;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
