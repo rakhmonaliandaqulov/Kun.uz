@@ -19,19 +19,23 @@ import java.util.List;
 public class SavedArticleController {
     @Autowired
     private SavedArticleService savedArticleService;
-    @PostMapping("/create")
-    public ResponseEntity<Integer> create(@RequestBody SavedArticleDto articleSavedDto){
-        return ResponseEntity.ok(savedArticleService.create(articleSavedDto));
-    }
 
+    @PostMapping("/")
+    public ResponseEntity<?> create(@RequestBody  SavedArticleDto dto,
+                                    @RequestHeader("Authorization") String auth) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(auth);
+        return ResponseEntity.ok(savedArticleService.create(dto, jwtDTO.getId()));
+    }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(savedArticleService.delete(id));
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id,
+                                    @RequestHeader("Authorization") String auth) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(auth);
+        savedArticleService.delete(id,jwtDTO.getId());
+        return ResponseEntity.ok(true);
     }
-
-    @GetMapping("/getList")
-    public ResponseEntity<List<SavedArticleResponseDto>> getList() {
-         return ResponseEntity.ok(savedArticleService.getList());
+    @GetMapping("/list")
+    public ResponseEntity<?> getList(@RequestHeader("Authorization") String auth) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(auth);
+        return ResponseEntity.ok(savedArticleService.getList(jwtDTO.getId()));
     }
-
 }

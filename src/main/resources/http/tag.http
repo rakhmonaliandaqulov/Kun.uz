@@ -1,10 +1,10 @@
 ### create tag
-POST localhost:8080/api/v1/tag/
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5NjY0NDMsImlkIjoxMywicm9sZSI6Ik1PREVSQVRPUiIsImV4cCI6MTY4MzA1Mjg0MywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.0vq_H2JAGbCyGRGLtttebLKzQFEWllUVEKno5Nt2IEdzmvpwJo3rJuyZEG7C-yS3FJeyb_NByJql58My_rLkQw
+POST localhost:8080/api/v1/tag/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMyMDU1MDIsImlkIjo0LCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjg0MDY5NTAyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.lERfjNOyzUvvhp_aXQ6bigF5YlOyBGcwG3x7iVTgA8OQacQFIjPrn-8GIP7dR0_FbN2dEcrKm6cOMM7sdgQCBQ
 Content-Type: application/json
 
 {
-  "name": "Benzin"
+  "name": "#Benzin"
 }
 
 ### update tag by id

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SavedArticleShortInfoDTO {
+public class SavedArticleShortInfoDto {
     private Integer id;
     private ArticleShortInfoDto article;
 

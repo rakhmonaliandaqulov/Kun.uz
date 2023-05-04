@@ -2,7 +2,10 @@ package com.example.controller;
 
 import com.example.dto.TagDto;
 import com.example.entity.RegionEntity;
+import com.example.enums.ProfileRole;
 import com.example.service.TagService;
+import com.example.util.JwtUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +17,34 @@ import java.util.List;
 public class TagController {
     @Autowired
     private TagService tagService;
-    @PostMapping("/create")
-    private ResponseEntity<Boolean> create() {
-        return null;
+
+    @PostMapping("/")
+    public ResponseEntity<?> create(@RequestBody @Valid TagDto dto,
+                                    @RequestHeader("Authorization") String auth) {
+        JwtUtil jwtDTO = JwtUtil.(auth, ProfileRole.MODERATOR, ProfileRole.ADMIN);
+        return ResponseEntity.ok(tagService.create(dto));
     }
-    @PutMapping("/update")
-    private ResponseEntity<Boolean> update() {
-        return null;
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<?> update(@RequestBody TagDto dto,
+                                    @RequestHeader("Authorization") String auth,
+                                    @PathVariable("id") Integer tagId) {
+        JwtUtil.getJwtDTO(auth, ProfileRole.MODERATOR, ProfileRole.ADMIN);
+        return ResponseEntity.ok(tagService.update(tagId, dto));
     }
-    @DeleteMapping("/delete")
-    private ResponseEntity<Boolean> delete() {
-        return null;
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id,
+                                    @RequestHeader("Authorization") String auth) {
+        JwtUtil.getJwtDTO(auth, ProfileRole.MODERATOR, ProfileRole.ADMIN);
+        tagService.delete(id);
+        return ResponseEntity.ok(true);
     }
-    @GetMapping("/getList")
-    private ResponseEntity<List<TagDto>> getList() {
-        return null;
+    @GetMapping("/list")
+    public ResponseEntity<?> getLIst(@RequestHeader("Authorization") String auth,
+                                     @RequestParam(value = "page",defaultValue = "1")Integer page,
+                                     @RequestParam(value = "size",defaultValue = "10")Integer size) {
+        JwtUtil.getJwtDTO(auth, ProfileRole.MODERATOR, ProfileRole.ADMIN);
+        return ResponseEntity.ok(tagService.getList(page,size));
     }
 }

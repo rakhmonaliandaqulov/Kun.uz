@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Table(name = "saved_article")
 public class SavedArticleEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(name = "profile_id")
     private Integer profileId;

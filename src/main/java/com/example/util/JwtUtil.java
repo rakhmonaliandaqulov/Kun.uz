@@ -8,7 +8,8 @@ import io.jsonwebtoken.*;
 import java.util.Date;
 
 public class JwtUtil {
-    private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
+    private static final int tokenLiveTime = 1000 * 3600 * 24*10; // 10-day
+    private static final int emailTokenLiveTime = 1000 * 120; // 2-minutes
     private static final String secretKey = "dasda143mazgi";
 
     public static String encode(Integer profileId, ProfileRole role) {
@@ -23,20 +24,16 @@ public class JwtUtil {
         jwtBuilder.setIssuer("Kunuz test portali");
         return jwtBuilder.compact();
     }
+
     public static JwtDto decode(String token) {
         try {
             JwtParser jwtParser = Jwts.parser();
             jwtParser.setSigningKey(secretKey);
-
             Jws<Claims> jws = jwtParser.parseClaimsJws(token);
-
             Claims claims = jws.getBody();
-
             Integer id = (Integer) claims.get("id");
-
             String role = (String) claims.get("role");
             ProfileRole profileRole = ProfileRole.valueOf(role);
-
             return new JwtDto(id, profileRole);
         } catch (JwtException e) {
             e.printStackTrace();
@@ -44,15 +41,7 @@ public class JwtUtil {
         throw new MethodNotAllowedException("Jwt exception");
     }
 
-    public static String encode(String text) {
-        JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.setIssuedAt(new Date());
-        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
-        jwtBuilder.claim("email", text);
-        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
-        jwtBuilder.setIssuer("Kunuz test portali");
-        return jwtBuilder.compact();
-    }
+
 
     public static String decodeEmailVerification(String token) {
         try {
@@ -66,10 +55,31 @@ public class JwtUtil {
         }
         throw new MethodNotAllowedException("Jwt exception");
     }
+    public static String encode(String text) {
+        JwtBuilder jwtBuilder = Jwts.builder();
+        jwtBuilder.setIssuedAt(new Date());
+        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
+        jwtBuilder.claim("email", text);
+        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (emailTokenLiveTime)));
+        jwtBuilder.setIssuer("Kunuz test portali");
+        return jwtBuilder.compact();
+    }
     public static JwtDto getJwtDTO(String authorization) {
         String[] str = authorization.split(" ");
         String jwt = str[1];
         return JwtUtil.decode(jwt);
+    }
+    public static boolean checkToOwner(String authorization,Integer userId) {
+        if (getJwtDTO(authorization).getId()!=userId){
+            throw new MethodNotAllowedException("Method not allowed");
+        }
+        return true;
+    }
+    public static void checkToAdminOrOwner(String authorization) {
+        JwtDto jwtDTO = getJwtDTO(authorization);
+        if (!(jwtDTO.getRole().equals(ProfileRole.ADMIN)||checkToOwner(authorization, jwtDTO.getId()))){
+            throw new MethodNotAllowedException("Method not allowed");
+        }
     }
 
     public static JwtDto getJwtDTO(String authorization, ProfileRole... roleList) {
