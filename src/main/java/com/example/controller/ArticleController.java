@@ -1,19 +1,17 @@
 package com.example.controller;
 
 import com.example.dto.JwtDto;
-import com.example.dto.article.ArticleRequestDto;
-import com.example.dto.article.ArticleShortInfoDto;
+import com.example.dto.article.ArticleDto;
+import com.example.dto.article.ArticleFilterDto;
 import com.example.enums.ArticleStatus;
+import com.example.enums.LangEnum;
 import com.example.enums.ProfileRole;
 import com.example.service.ArticleService;
 import com.example.util.JwtUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/article")
@@ -21,97 +19,104 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-    @PostMapping("")
-    public ResponseEntity<ArticleRequestDto> create(@RequestBody @Valid ArticleRequestDto dto,
-                                                    @RequestHeader("Authorization") String authorization) {
-        JwtDto jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR);
-        return ResponseEntity.ok(articleService.create(dto, jwt.getId()));
+    @PostMapping("/")
+    public ResponseEntity<?> create(@RequestBody @Valid ArticleDto dto,
+                                    @RequestHeader("Authorization") String auth) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(auth, ProfileRole.MODERATOR);
+        return ResponseEntity.ok(articleService.create(dto, jwtDTO.getId()));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<ArticleRequestDto> update(@RequestBody ArticleRequestDto dto,
-                                                    @RequestHeader("Authorization") String authorization,
-                                                    @PathVariable("id") String articleId) {
-        JwtDto jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR);
+    @PostMapping("/update/{id}")
+    public ResponseEntity<?> update(@RequestBody ArticleDto dto,
+                                    @RequestHeader("Authorization") String auth,
+                                    @PathVariable("id") String articleId) {
+        JwtUtil.getJwtDTO(auth, ProfileRole.MODERATOR);
         return ResponseEntity.ok(articleService.update(dto, articleId));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") String id,
-                                    @RequestHeader("Authorization") String authorization) {
-        JwtDto jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR, ProfileRole.ADMIN);
+                                    @RequestHeader("Authorization") String auth) {
+        JwtUtil.getJwtDTO(auth, ProfileRole.MODERATOR);
         return ResponseEntity.ok(articleService.delete(id));
     }
 
-    @PostMapping("/change-status/{id}")
+    @PutMapping("/publish/{id}")
     public ResponseEntity<?> changeStatus(@PathVariable("id") String id,
-                                          @RequestParam String status,
-                                          @RequestHeader("Authorization") String authorization) {
-        JwtDto jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.PUBLISHER);
-        return ResponseEntity.ok(articleService.changeStatus(ArticleStatus.valueOf(status), id, jwt.getId()));
+                                          @RequestParam ArticleStatus status,
+                                          @RequestHeader("Authorization") String auth) {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(auth, ProfileRole.PUBLISHER);
+        return ResponseEntity.ok(articleService.changeStatusToPublish(id, status, jwtDTO.getId()));
     }
 
-    @GetMapping("/type/{id}/five")
-    public ResponseEntity<List<ArticleShortInfoDto>> get5ByTypeId(@PathVariable("id") Integer id) {
-//        return ResponseEntity.ok(articleService.getLast5ByTypeId(id));
-        return ResponseEntity.ok(articleService.getLast5ByTypeId2(id));
+    @GetMapping("/publish/5/{id}")
+    public ResponseEntity<?> getByTypeTop5(@PathVariable("id") Integer typeId) {
+        return ResponseEntity.ok(articleService.getTop5ByTypeId(typeId));
     }
 
-
-    @GetMapping("/type/{id}/three")
-    public ResponseEntity<List<ArticleShortInfoDto>> get3ByTypeId(@PathVariable("id") Integer id) {
-//        return ResponseEntity.ok(articleService.getLast5ByTypeId(id));
-        return ResponseEntity.ok(articleService.getLast3ByTypeId(id));
+    @GetMapping("/publish/3/{id}")
+    public ResponseEntity<?> getByTypeTop3(@PathVariable("id") Integer typeId) {
+        return ResponseEntity.ok(articleService.getTop3ByTypeId(typeId));
     }
 
-   /* @GetMapping("get-last8")
-    public ResponseEntity<List<ArticleShortInfoDto>> get3ByTypeId2(@RequestBody ArticleListDto listDTO) {
-//        return ResponseEntity.ok(articleService.getLast5ByTypeId(id));
-        return ResponseEntity.ok(articleService.getLast8WithoutList(listDTO.getList()));
-    }*/
-
-    /*@GetMapping("/get-id-lang")
-    public ResponseEntity<?> getByIdAndLang(@RequestParam("id") String id, @RequestParam("language") String language) {
-        return ResponseEntity.ok(articleService.getByIdAndLanguage(id, language));
-    }*/
-
-    @GetMapping("/get-last4")
-    public ResponseEntity<List<ArticleShortInfoDto>> getLast4Except(@RequestParam("id") String id){
-        return ResponseEntity.ok((articleService.getLast4ExceptGivenId(id)));
+    @GetMapping("/publish/8/{id}")
+    public ResponseEntity<?> getByTypeTop8(@PathVariable("id") Integer typeId) {
+        return ResponseEntity.ok(articleService.getTop8ByTypeId(typeId));
     }
 
-    @GetMapping("/get-last4view")
-    public ResponseEntity<List<ArticleShortInfoDto>> getLast4MostView(){
-        return ResponseEntity.ok((articleService.getLast4MostView()));
+    @GetMapping("/publish")
+    public ResponseEntity<?> getByIdAndLang(@RequestParam("id") String articleId,
+                                            @RequestParam("lang") LangEnum lang) {
+        return ResponseEntity.ok(articleService.getByIdAndLang(articleId, lang));
     }
 
-    @GetMapping("/get5by-type-region")
-    public ResponseEntity<List<ArticleShortInfoDto>> get5ByTypeAndRegion(@RequestParam("type") Integer typeId, @RequestParam("region") Integer regionId){
-        return ResponseEntity.ok((articleService.get5ByTypeAndRegion(typeId, regionId)));
+    @GetMapping("/publish/4")
+    public ResponseEntity<?> getByTypeWithoutId(@RequestParam("articleId") String articleId,
+                                                @RequestParam("typeId") Integer typeId) {
+        return ResponseEntity.ok(articleService.getByTypeWithoutId(articleId, typeId));
     }
 
-    @GetMapping("/get5by-category")
-    public ResponseEntity<List<ArticleShortInfoDto>> get5ByCategory(@RequestParam("category") Integer categoryId){
-        return ResponseEntity.ok(articleService.get5ByCategory(categoryId));
+    @GetMapping("/publish/top/4")
+    public ResponseEntity<?> getByTop4Read() {
+        return ResponseEntity.ok(articleService.getByTop4Read());
     }
 
-    @GetMapping(value = "/paging")
-    public ResponseEntity<Page<ArticleShortInfoDto>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                            @RequestParam(value = "size", defaultValue = "30") int size,
-                                                            @RequestParam(value = "id") Integer id) {
-        return ResponseEntity.ok(articleService.getArticleByRegionIdPaging(page, size, id));
+    @GetMapping("/publish/region/5")
+    public ResponseEntity<?> getByTop5TypeAndRegion(@RequestParam("regionId") Integer regionId,
+                                                    @RequestParam("typeId") Integer typeId) {
+        return ResponseEntity.ok(articleService.getTop5TypeAndRegion(regionId, typeId));
     }
 
-    @GetMapping(value = "/paging-category")
-    public ResponseEntity<Page<ArticleShortInfoDto>> pagingWithCategory(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                                        @RequestParam(value = "size", defaultValue = "30") int size,
-                                                                        @RequestParam(value = "id") Integer id) {
-        return ResponseEntity.ok(articleService.getArticleByCategoryIdPaging(page, size, id));
+    @GetMapping("/publish/region")
+    public ResponseEntity<?> getArticleByRegion(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                                @RequestParam("regionId") Integer regionId) {
+        return ResponseEntity.ok(articleService.getArticleByRegion(regionId, page, size));
     }
 
-    @GetMapping("/view-count")
-    public ResponseEntity<Integer> increaseViewCount(@RequestParam("id") String articleId){
-        return ResponseEntity.ok(articleService.increaseViewCount(articleId));
+    @GetMapping("/publish/category")
+    public ResponseEntity<?> getArticleByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                  @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                                  @RequestParam("categoryId") Integer categoryId) {
+        return ResponseEntity.ok(articleService.getArticleByCategory(categoryId, page, size));
+    }
+
+    @GetMapping("/publish/category/5/{id}")
+    public ResponseEntity<?> getTop5ArticleByCategory(@PathVariable("id") Integer categoryId) {
+        return ResponseEntity.ok(articleService.getArticleByCategory(categoryId, 1, 5));
+    }
+
+    @GetMapping("/publish/filter")
+    public ResponseEntity<?> filter(@RequestBody ArticleFilterDto dto,
+                                    @RequestHeader("Authorization") String auth) {
+
+        return ResponseEntity.ok(articleService.filter(dto));
+    }
+
+    @GetMapping("/publish/tag/{tagName}")
+    public ResponseEntity<?> getByTagName(@PathVariable String tagName) {
+
+        return ResponseEntity.ok(articleService.getByTagName(tagName));
     }
 
 }

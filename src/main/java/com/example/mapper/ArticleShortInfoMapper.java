@@ -1,7 +1,6 @@
 package com.example.mapper;
 
 import java.time.LocalDateTime;
-
 public interface ArticleShortInfoMapper {
     String getId();
 
@@ -12,5 +11,4 @@ public interface ArticleShortInfoMapper {
     String getAttachId();
 
     LocalDateTime getPublished_date();
-
 }

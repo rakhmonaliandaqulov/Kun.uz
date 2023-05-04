@@ -29,7 +29,7 @@ public class AttachController {
     public byte[] open(@PathVariable("fileName") String fileName) {
         if (fileName != null && fileName.length() > 0) {
             try {
-                return this.attachService.loadImage(fileName);
+                return this.attachService.loadImage2(fileName);
             } catch (Exception e) {
                 e.printStackTrace();
                 return new byte[0];

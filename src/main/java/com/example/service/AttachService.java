@@ -111,8 +111,6 @@ public class AttachService {
         }
         return null;
     }
-
-
     public byte[] loadImage(String fileName) {
         byte[] imageInByte;
 
