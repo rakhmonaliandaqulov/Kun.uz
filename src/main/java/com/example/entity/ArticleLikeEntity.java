@@ -1,7 +1,6 @@
 package com.example.entity;
 
-import com.example.enums.LikeStatus;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.example.enums.EmotionStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,22 +15,19 @@ public class ArticleLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @Column(name = "profile_id")
     private Integer profileId;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id", insertable = false, updatable = false)
     private ProfileEntity profile;
-
     @Column(name = "article_id")
     private String articleId;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id", insertable = false, updatable = false)
     private ArticleEntity article;
-
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
-
+    private LocalDateTime createdDate = LocalDateTime.now();
     @Column(name = "status")
-    private LikeStatus status;
+    @Enumerated(EnumType.STRING)
+    private EmotionStatus status;
 }

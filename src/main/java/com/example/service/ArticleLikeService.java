@@ -1,25 +1,47 @@
 package com.example.service;
 
 import com.example.dto.article.ArticleLikeDto;
+import com.example.entity.ArticleLikeEntity;
+import com.example.enums.EmotionStatus;
 import com.example.repository.ArticleLikeRepository;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
+@AllArgsConstructor
 public class ArticleLikeService {
-    @Autowired
-    private ArticleLikeRepository articleLikeRepository;
+    private final ArticleLikeRepository articleLikeRepository;
 
-    public Boolean like(Integer id, ArticleLikeDto dto) {
-        return null;
+    public boolean like(String articleId, Integer profileId) {
+        makeEmotion(articleId, profileId, EmotionStatus.LIKE);
+        return true;
     }
 
-    public Boolean disLike(Integer id, ArticleLikeDto dto) {
-        return null;
+    public boolean dislike(String articleId, Integer profileId) {
+        makeEmotion(articleId, profileId, EmotionStatus.DISLIKE);
+        return true;
     }
 
-    public Boolean remove(Integer id) {
-        return null;
+    public boolean delete(String articleId, Integer profileId) {
+        articleLikeRepository.delete(articleId, profileId);
+        return true;
+    }
+
+    private void makeEmotion(String articleId, Integer profileId, EmotionStatus status) {
+        Optional<ArticleLikeEntity> optional = articleLikeRepository
+                .findByArticleIdAndProfileId(articleId, profileId);
+        if (optional.isEmpty()) {
+            ArticleLikeEntity entity = new ArticleLikeEntity();
+            entity.setArticleId(articleId);
+            entity.setProfileId(profileId);
+            entity.setStatus(status);
+            articleLikeRepository.save(entity);
+            // article like count dislike count larni trigger orqali qilasizlar.
+        } else {
+            articleLikeRepository.update(status, articleId, profileId);
+        }
     }
 }

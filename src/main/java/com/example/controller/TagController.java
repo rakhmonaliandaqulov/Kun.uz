@@ -1,8 +1,10 @@
 package com.example.controller;
 
+import com.example.dto.JwtDto;
 import com.example.dto.TagDto;
 import com.example.entity.RegionEntity;
 import com.example.enums.ProfileRole;
+import com.example.exps.ItemAlreadyExistsException;
 import com.example.service.TagService;
 import com.example.util.JwtUtil;
 import jakarta.validation.Valid;
@@ -20,8 +22,8 @@ public class TagController {
 
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody @Valid TagDto dto,
-                                    @RequestHeader("Authorization") String auth) {
-        JwtUtil jwtDTO = JwtUtil.(auth, ProfileRole.MODERATOR, ProfileRole.ADMIN);
+                                    @RequestHeader("Authorization") String auth) throws ItemAlreadyExistsException {
+        JwtDto jwtDTO = JwtUtil.getJwtDTO(auth, ProfileRole.MODERATOR, ProfileRole.ADMIN);
         return ResponseEntity.ok(tagService.create(dto));
     }
 
