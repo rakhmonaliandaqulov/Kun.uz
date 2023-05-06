@@ -4,9 +4,9 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMyMDU1MDIsImlkIjo0LCJyb
 Content-Type: application/json
 
 {
-  "title": "Sdfvdfvcxsdfvddfgfsvvcdsf ",
-  "description": "dfvbsm, ;ljg bflkmx dlk;mgvc ",
-  "content": "dfgl,ml;df;ld;fldfdl,;fldsfdfl;fg;lf;l,gfgl;dfmjklnjk ;fdgc ",
+  "title": "dfdsfsdf adfgdfsgsdfgsdfgdfsgdfg",
+  "description": "dfgdsddfsdfgsdfgdsfgdfsgsdfgdsfgdfsg",
+  "content": "sadsfasdfsdffadfsfdsgsdfgdfsgfdgdfgdfgdfsgdsfgdfsgdfgdfg",
   "categoryId": 1,
   "regionId": 2,
   "typeId": 3

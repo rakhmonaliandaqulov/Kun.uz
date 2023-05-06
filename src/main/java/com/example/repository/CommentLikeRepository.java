@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CommentLikeRepository extends CrudRepository<CommentEntity, Integer> {
+public interface CommentLikeRepository extends CrudRepository<CommentLikeEntity, Integer> {
     Optional<CommentLikeEntity> findByArticleIdAndProfileId(String articleId, Integer profileId);
 
     @Modifying

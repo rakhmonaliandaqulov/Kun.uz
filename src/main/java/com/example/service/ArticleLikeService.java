@@ -39,7 +39,6 @@ public class ArticleLikeService {
             entity.setProfileId(profileId);
             entity.setStatus(status);
             articleLikeRepository.save(entity);
-            // article like count dislike count larni trigger orqali qilasizlar.
         } else {
             articleLikeRepository.update(status, articleId, profileId);
         }

@@ -42,7 +42,6 @@ public class CommentLikeService {
             entity.setProfileId(profileId);
             entity.setStatus(status);
             commentLikeRepository.save(entity);
-            // article like count dislike count larni trigger orqali qilasizlar.
         } else {
             commentLikeRepository.update(status, articleId, profileId);
         }
