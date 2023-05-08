@@ -4,6 +4,7 @@ import com.example.dto.JwtDto;
 import com.example.enums.ProfileRole;
 import com.example.exps.MethodNotAllowedException;
 import io.jsonwebtoken.*;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Date;
 
@@ -26,7 +27,6 @@ public class JwtUtil {
     }
 
     public static JwtDto decode(String token) {
-        try {
             JwtParser jwtParser = Jwts.parser();
             jwtParser.setSigningKey(secretKey);
             Jws<Claims> jws = jwtParser.parseClaimsJws(token);
@@ -35,10 +35,6 @@ public class JwtUtil {
             String role = (String) claims.get("role");
             ProfileRole profileRole = ProfileRole.valueOf(role);
             return new JwtDto(id, profileRole);
-        } catch (JwtException e) {
-            e.printStackTrace();
-        }
-        throw new MethodNotAllowedException("Jwt exception");
     }
 
 
@@ -97,5 +93,18 @@ public class JwtUtil {
             throw new MethodNotAllowedException("Method not allowed");
         }
         return jwtDTO;
+    }
+    public static void checkForRequiredRole(HttpServletRequest request, ProfileRole... roleList) {
+        ProfileRole jwtRole = (ProfileRole) request.getAttribute("role");
+        boolean roleFound = false;
+        for (ProfileRole role : roleList) {
+            if (jwtRole.equals(role)) {
+                roleFound = true;
+                break;
+            }
+        }
+        if (!roleFound) {
+            throw new MethodNotAllowedException("Method not allowed");
+        }
     }
 }

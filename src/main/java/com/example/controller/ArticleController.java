@@ -3,11 +3,13 @@ package com.example.controller;
 import com.example.dto.JwtDto;
 import com.example.dto.article.ArticleDto;
 import com.example.dto.article.ArticleFilterDto;
+import com.example.dto.article.ArticleRequestDto;
 import com.example.enums.ArticleStatus;
 import com.example.enums.LangEnum;
 import com.example.enums.ProfileRole;
 import com.example.service.ArticleService;
 import com.example.util.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -117,6 +119,15 @@ public class ArticleController {
     public ResponseEntity<?> getByTagName(@PathVariable String tagName) {
 
         return ResponseEntity.ok(articleService.getByTagName(tagName));
+    }
+
+    /////////////
+    @PostMapping("/private")
+    public ResponseEntity<ArticleDto> create(@RequestBody @Valid ArticleDto dto,
+                                                    HttpServletRequest request) {
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR);
+        Integer prtId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(articleService.create(dto, prtId));
     }
 
 }
