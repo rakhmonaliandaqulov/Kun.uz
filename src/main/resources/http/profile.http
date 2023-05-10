@@ -1,14 +1,14 @@
 ### Create profile
 POST localhost:8080/api/v1/profile/
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5OTA3NjksImlkIjo0LCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODMwNzcxNjksImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.P7jvhtUwqLy8PAd1xQFpZg18UfWCAky4tV6ZoPoAA6kljHs4ywuMrkl-yKbFrt-r3FgBFGo1fcJRxyE-VHg8_A
+Authorization: Basic user:46589f70-9261-4336-b6ee-50089e0931c9
 Content-Type:  application/json
 
 {
-  "name": "dgfchvjb",
-  "surname": "gvhbjj",
-  "email": "hcgvjbkn@mail.ru",
-  "phone": "23456",
-  "password": "09876",
+  "name": "sdfgfs",
+  "surname": "asdfdf",
+  "email": "sdfdds@mail.ru",
+  "phone": "4352",
+  "password": "34525",
   "role": "USER"
 }
 

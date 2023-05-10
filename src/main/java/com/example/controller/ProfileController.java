@@ -9,6 +9,8 @@ import com.example.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +39,9 @@ public class ProfileController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProfileDto> getById(@PathVariable("id") Integer id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.out.println(currentPrincipalName);
         return ResponseEntity.ok(profileService.getById(id));
     }
 

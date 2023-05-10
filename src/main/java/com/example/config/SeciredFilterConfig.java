@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SeciredFilterConfig {
-    @Autowired
+    /*@Autowired
     private TokenFilter tokenFilter;
 
     @Bean
@@ -17,5 +17,5 @@ public class SeciredFilterConfig {
         bean.setFilter(tokenFilter);
         bean.addUrlPatterns("/api/v1/article/private/*");
         return bean;
-    }
+    }*/
 }
