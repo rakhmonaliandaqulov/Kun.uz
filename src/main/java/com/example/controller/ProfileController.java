@@ -21,11 +21,9 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
-    @PostMapping({"", "/"})
-    public ResponseEntity<ProfileDto> create(@RequestBody ProfileDto dto,
-                                             @RequestHeader("Authorization") String authorization) {
-        JwtDto jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
-        return ResponseEntity.ok(profileService.create(dto, jwtDTO.getId()));
+    @PostMapping({"/adm", "/adm/"})
+    public ResponseEntity<ProfileDto> create(@RequestBody ProfileDto dto) {
+        return ResponseEntity.ok(profileService.create(dto);
     }
 
     @GetMapping("/list-paging")

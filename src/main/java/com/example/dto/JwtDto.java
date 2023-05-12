@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class JwtDto {
-    private Integer id;
     private ProfileRole role;
+    private String email;
 }

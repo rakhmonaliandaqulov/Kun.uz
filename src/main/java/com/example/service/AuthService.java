@@ -41,7 +41,7 @@ public class AuthService {
         responseDTO.setName(entity.getName());
         responseDTO.setSurname(entity.getSurname());
         responseDTO.setRole(entity.getRole());
-        responseDTO.setJwt(JwtUtil.encode(entity.getId(), entity.getRole()));
+        responseDTO.setJwt(JwtUtil.encode(entity.getEmail(), entity.getRole()));
         return responseDTO;
     }
     public ProfileDto registration(ProfileDto dto) {

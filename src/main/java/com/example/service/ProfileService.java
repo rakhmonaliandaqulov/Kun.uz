@@ -6,6 +6,7 @@ import com.example.enums.GeneralStatus;
 import com.example.exps.ItemNotFoundException;
 import com.example.repository.ProfileRepository;
 import com.example.util.MD5Util;
+import com.example.util.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    public ProfileDto create(ProfileDto dto, Integer adminId) {
+    public ProfileDto create(ProfileDto dto) {
         // check - homework
         isValidProfile(dto);
 
@@ -33,7 +34,7 @@ public class ProfileService {
         entity.setPassword(MD5Util.getMd5Hash(dto.getPassword())); // MD5 ?
         entity.setCreatedDate(LocalDateTime.now());
         entity.setVisible(true);
-        entity.setPrtId(adminId);
+        entity.setPrtId(SpringSecurityUtil.getProfileId());
         entity.setStatus(GeneralStatus.ACTIVE);
         profileRepository.save(entity); // save profile
 

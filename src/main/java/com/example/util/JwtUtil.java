@@ -13,12 +13,12 @@ public class JwtUtil {
     private static final int emailTokenLiveTime = 1000 * 120; // 2-minutes
     private static final String secretKey = "dasda143mazgi";
 
-    public static String encode(Integer profileId, ProfileRole role) {
+    public static String encode(String email, ProfileRole role) {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setIssuedAt(new Date());
         jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
 
-        jwtBuilder.claim("id", profileId);
+        jwtBuilder.claim("email", email);
         jwtBuilder.claim("role", role);
 
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
@@ -31,10 +31,10 @@ public class JwtUtil {
             jwtParser.setSigningKey(secretKey);
             Jws<Claims> jws = jwtParser.parseClaimsJws(token);
             Claims claims = jws.getBody();
-            Integer id = (Integer) claims.get("id");
+            String email = (String) claims.get("email");
             String role = (String) claims.get("role");
             ProfileRole profileRole = ProfileRole.valueOf(role);
-            return new JwtDto(id, profileRole);
+            return new JwtDto(email, profileRole);
     }
 
 
