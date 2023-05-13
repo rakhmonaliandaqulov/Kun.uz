@@ -69,7 +69,6 @@ public class SecurityConfig {
 //                .authenticated().and().httpBasic();
 //        return http.build();
 //    }
-    @Bean
     public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
             @Override

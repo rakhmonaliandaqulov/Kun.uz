@@ -12,6 +12,7 @@ import com.example.exps.ItemNotFoundException;
 import com.example.mapper.ArticleShortInfoMapper;
 import com.example.repository.ArticleFilterRepository;
 import com.example.repository.ArticleRepository;
+import com.example.util.SpringSecurityUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -35,12 +36,12 @@ public class ArticleService {
     @Autowired
     private ArticleFilterRepository articleFilterRepository;
 
-    public ArticleDto create(ArticleDto dto, Integer moderator_id) {
+    public ArticleDto create(ArticleDto dto) {
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
         entity.setContent(dto.getContent());
-        entity.setModeratorId(moderator_id);
+        entity.setModeratorId(SpringSecurityUtil.getProfileId());
         entity.setRegionId(dto.getRegionId());
         entity.setCategoryId(dto.getCategoryId());
         entity.setAttachId(dto.getAttachId());
@@ -163,11 +164,11 @@ public class ArticleService {
         return optional.get();
     }
 
-    public Boolean changeStatusToPublish(String id, ArticleStatus status, Integer publisherId) {
+    public Boolean changeStatusToPublish(String id, ArticleStatus status) {
         ArticleEntity entity = getById(id);
         if (status.equals(ArticleStatus.PUBLISHED)) {
             entity.setPublishedDate(LocalDateTime.now());
-            entity.setPublisherId(publisherId);
+            entity.setPublisherId(SpringSecurityUtil.getProfileId());
         }
         entity.setStatus(status);
         articleRepository.save(entity);

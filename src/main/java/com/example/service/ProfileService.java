@@ -107,13 +107,13 @@ public class ProfileService {
         }
          return dtoList;
     }
-    public Boolean deleteById(Integer adminId, Integer id) {
+    public Boolean deleteById(Integer id) {
         ProfileEntity entity = get(id);
         if (entity == null) {
             throw new ItemNotFoundException("Profile not found.");
         }
         entity.setVisible(false);
-        entity.setPrtId(adminId);
+        entity.setPrtId(SpringSecurityUtil.getProfileId());
         profileRepository.save(entity);
         return true;
     }

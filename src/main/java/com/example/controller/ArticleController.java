@@ -22,10 +22,8 @@ public class ArticleController {
     private ArticleService articleService;
 
     @PostMapping("/")
-    public ResponseEntity<?> create(@RequestBody @Valid ArticleDto dto,
-                                    @RequestHeader("Authorization") String auth) {
-        JwtDto jwtDTO = JwtUtil.getJwtDTO(auth, ProfileRole.MODERATOR);
-        return ResponseEntity.ok(articleService.create(dto, jwtDTO.getId()));
+    public ResponseEntity<?> create(@RequestBody @Valid ArticleDto dto) {
+        return ResponseEntity.ok(articleService.create(dto));
     }
 
     @PostMapping("/update/{id}")
@@ -45,10 +43,8 @@ public class ArticleController {
 
     @PutMapping("/publish/{id}")
     public ResponseEntity<?> changeStatus(@PathVariable("id") String id,
-                                          @RequestParam ArticleStatus status,
-                                          @RequestHeader("Authorization") String auth) {
-        JwtDto jwtDTO = JwtUtil.getJwtDTO(auth, ProfileRole.PUBLISHER);
-        return ResponseEntity.ok(articleService.changeStatusToPublish(id, status, jwtDTO.getId()));
+                                          @RequestParam ArticleStatus status) {
+        return ResponseEntity.ok(articleService.changeStatusToPublish(id, status));
     }
 
     @GetMapping("/publish/5/{id}")
@@ -127,7 +123,7 @@ public class ArticleController {
                                                     HttpServletRequest request) {
         JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR);
         Integer prtId = (Integer) request.getAttribute("id");
-        return ResponseEntity.ok(articleService.create(dto, prtId));
+        return ResponseEntity.ok(articleService.create(dto));
     }
 
 }

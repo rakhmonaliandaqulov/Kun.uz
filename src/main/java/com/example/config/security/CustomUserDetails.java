@@ -55,7 +55,7 @@ public class CustomUserDetails implements UserDetails {
         return profileEntity.getVisible();
     }
 
-    public Thread getProfileEntity() {
-        return null;
+    public ProfileEntity getProfileEntity() {
+        return profileEntity;
     }
 }

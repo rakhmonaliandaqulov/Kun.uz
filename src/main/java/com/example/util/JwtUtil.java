@@ -34,7 +34,7 @@ public class JwtUtil {
             String email = (String) claims.get("email");
             String role = (String) claims.get("role");
             ProfileRole profileRole = ProfileRole.valueOf(role);
-            return new JwtDto(email, profileRole);
+            return new JwtDto(profileRole, email);
     }
 
 
@@ -65,15 +65,15 @@ public class JwtUtil {
         String jwt = str[1];
         return JwtUtil.decode(jwt);
     }
-    public static boolean checkToOwner(String authorization,Integer userId) {
-        if (getJwtDTO(authorization).getId()!=userId){
+    public static boolean checkToOwner(String authorization, String email) {
+        if (getJwtDTO(authorization).getEmail()!=email){
             throw new MethodNotAllowedException("Method not allowed");
         }
         return true;
     }
     public static void checkToAdminOrOwner(String authorization) {
         JwtDto jwtDTO = getJwtDTO(authorization);
-        if (!(jwtDTO.getRole().equals(ProfileRole.ADMIN)||checkToOwner(authorization, jwtDTO.getId()))){
+        if (!(jwtDTO.getRole().equals(ProfileRole.ADMIN)||checkToOwner(authorization, jwtDTO.getEmail()))){
             throw new MethodNotAllowedException("Method not allowed");
         }
     }
