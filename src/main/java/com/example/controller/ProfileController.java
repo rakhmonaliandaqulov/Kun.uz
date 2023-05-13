@@ -23,7 +23,7 @@ public class ProfileController {
 
     @PostMapping({"/adm", "/adm/"})
     public ResponseEntity<ProfileDto> create(@RequestBody ProfileDto dto) {
-        return ResponseEntity.ok(profileService.create(dto);
+        return ResponseEntity.ok(profileService.create(dto));
     }
 
     @GetMapping("/list-paging")
@@ -44,10 +44,8 @@ public class ProfileController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id,
-                                              @RequestHeader("Authorization") String authorization) {
-        JwtDto jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
-        return ResponseEntity.ok(profileService.deleteById(id, jwtDTO.getId()));
+    public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(profileService.deleteById(id));
     }
 
     @PutMapping("/updateAdmin/{id}")

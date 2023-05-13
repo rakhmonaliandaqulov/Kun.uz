@@ -52,23 +52,23 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // authorization
-        // URL ,API  Permission
-        // /api/v1/article/private/* - MODERATOR
-        // /api/v1/article//private/{id} - POST - MODERATOR
-        http.csrf().disable().cors().disable();
-
-        http.authorizeHttpRequests()
-                .requestMatchers("/api/v1/*/public/**").permitAll()
-                .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
-                .requestMatchers("/api/v1/auth/**").permitAll()
-                .requestMatchers("/api/v1/*/private/*").hasAnyRole("ADMIN", "MODERATOR")
-                .anyRequest()
-                .authenticated().and().httpBasic();
-        return http.build();
-    }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        // authorization
+//        // URL ,API  Permission
+//        // /api/v1/article/private/* - MODERATOR
+//        // /api/v1/article//private/{id} - POST - MODERATOR
+//        http.csrf().disable().cors().disable();
+//
+//        http.authorizeHttpRequests()
+//                .requestMatchers("/api/v1/*/public/**").permitAll()
+//                .requestMatchers("/api/v1/*/private").hasRole("ADMIN")
+//                .requestMatchers("/api/v1/auth/**").permitAll()
+//                .requestMatchers("/api/v1/*/private/*").hasAnyRole("ADMIN", "MODERATOR")
+//                .anyRequest()
+//                .authenticated().and().httpBasic();
+//        return http.build();
+//    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
