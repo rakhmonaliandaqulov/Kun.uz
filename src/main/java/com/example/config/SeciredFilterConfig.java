@@ -22,5 +22,4 @@ public class SeciredFilterConfig {
         bean.addUrlPatterns("/api/v1/article/private/*");
         return bean;
     }
-
 }
